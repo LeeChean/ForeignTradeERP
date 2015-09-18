@@ -1,0 +1,98 @@
+﻿@model List<FTERPWeb.Models.RoleModel>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    @Html.StaticFor("/js/jquery/jquery-1.7.2.min.js")
+    @Html.StaticFor("/css/home/backstage.css")
+    @Html.StaticFor("/css/home/common.css")
+    @Html.StaticFor("/css/home/Validate.css")
+    @Html.StaticFor("/js/Common/Common.js")
+    @Html.StaticFor("/js/Common/CheckBoxUtil.js")
+    @Html.StaticFor("/js/jquery/jquery.form.js")
+    @Html.Partial("DialogPartialView")
+</head>
+<body>
+    <div class="m-content">
+        <div class="m-form f-cb">
+            @using (Html.BeginForm())
+            {
+                <dl class="f-cb" style="height: 100px; width: 350px">
+                    <dt></dt>
+                    <dd>
+                        @if (Model.Count == 0)
+                        {
+                            @:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;暂无数据
+                        }
+                        else
+                        {
+                            foreach (var item in Model)
+                            {
+                            <label>
+                                <input name="chkRole" type="checkbox" value="@item.Id" />@item.Name
+                            </label>
+                            }
+                        }
+                    </dd>
+                </dl>
+                <dl class="f-cb">
+                    <dt></dt>
+                    <dd>
+                        <input type="hidden" id="hidRoleId" value="@ViewBag.roleIds"/>
+                        <input type="button" class="u-btnblue" value="保存" onclick="Save()" />
+                        <input type="button" value="取消" class="u-btnblue marl20" onclick="art.dialog.close();" /></dd>
+                </dl>
+            }
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            $("input[name='chkRole']").each(function () {
+                var roleIds = $("#hidRoleId").val();
+                if (roleIds.indexOf(this.value) != -1) {
+                    $(this).attr("checked", "checked");
+                }
+            });
+
+            $("input[name='chkRole']").click(function () {
+                var roleIds;
+                if ($("#hidRoleId").val() != "") {
+                    roleIds = $("#hidRoleId").val().split(',');
+                }
+                else {
+                    roleIds = new Array();
+                }
+                if (this.checked) {
+                    roleIds.push(this.value);
+                }
+                else {
+                    roleIds.splice($.inArray(this.value, roleIds), 1);
+                }
+
+                $("#hidRoleId").val(roleIds.join(','));
+            });
+        });
+
+        function Save() {
+            if ($("#hidRoleId").val() == "") {
+                Common.Tip("请选择角色", null);
+            }
+
+            $.ajax({
+                url: "/Home/User/SaveUserRole",
+                data: { userId: "@ViewBag.userId", roleIds: $("#hidRoleId").val() },
+                type: "post",
+                dataType: "text",
+                success: function (msg) {
+                    if (msg == "1") {
+                        art.dialog.close();
+                    }
+                    else {
+                        Common.Error("保存失败，请稍后再试", null);
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

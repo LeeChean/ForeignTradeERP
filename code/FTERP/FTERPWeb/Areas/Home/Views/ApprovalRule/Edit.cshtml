@@ -1,0 +1,75 @@
+﻿@model FTERPWeb.Home.ViewModels.AddApprovalModel
+@{
+    ViewBag.Title = "编辑审批流程";
+    Layout = "~/Areas/Home/Views/Shared/_Layout.cshtml";
+}
+@Html.StaticFor("/js/Common/Department.js")
+@Html.RenderNavHtml()
+<div class="m-content">
+    @using (Html.BeginForm())
+    {
+        <div class="m-form f-cb">
+            <dl class="f-cb">
+                <dt>单据类别:</dt>
+                <dd>@Html.DropDownList("type", ViewBag.Type as List<SelectListItem>, new { @class = "u-iptl" })
+                    @Html.ValidationMessageFor(m => m.Type)</dd>
+                <dt>部门:</dt>
+                <dd>
+                    @if (ViewBag.depList != null)
+                    {
+                        int index = 0;
+                        foreach (var item in ViewBag.depList)
+                        {
+                            index++;
+                        @Html.DropDownList("Dep_" + index, item as List<SelectListItem>, new { @class = "u-iptm", @onchange = "GetSubDepartment(this)" })
+                        <span style="width: 10px"></span>
+                        }
+                    }
+                </dd>
+                <dt><i>*</i>审批流程:</dt>
+                <dd>
+                    @Html.TextAreaFor(m => m.Process, new { @readonly = "readonly", @class = "u-taal", onfocus = "DefineProcess()" })
+                    @Html.ValidationMessageFor(m => m.Process)
+                </dd>
+                <dt></dt>
+                <dd>
+                    @Html.HiddenFor(m => m.Id)
+                    @Html.HiddenFor(m => m.DepartmentId)
+                    @Html.HiddenFor(m => m.RoleId)
+                    <input type="button" value="保存" class="u-btnblue" onclick="Common.Save({ actionUrl: '/Home/ApprovalRule/Edit',backUrl:'@ViewBag.backUrl' });" />
+                    <input type="button" value="返回" class="u-btnblue marl10" onclick="location.href = '/Home/ApprovalRule/Index';" />
+                </dd>
+            </dl>
+        </div>
+    }
+</div>
+<script type="text/javascript">
+    $(function () {
+        art.dialog.data("roleIds", "@Model.RoleId");
+        art.dialog.data("process", "@Model.Process");
+
+        $("#type").val("@Model.Type");
+
+        var depArray = "@ViewBag.depIdList".split('-');
+        for (var j = 0; j < depArray.length; j++) {
+            $("#Dep_" + (j + 1)).val(depArray[j]);
+        }
+    });
+
+    function DefineProcess() {
+        art.dialog.open('/Home/ApprovalRule/DefineRule', {
+            title: '审批流程定义',
+            fixed: true,
+            width: '550px',
+            close: function () {
+                if (art.dialog.data("process") != null) {
+                    var process = art.dialog.data("process").replace(/&gt;/g, ">").replace(/ /g, "").replace(/\n/g, "")
+                    $("#Process").val(process);
+                }
+                if (art.dialog.data("roleIds") != null) {
+                    $("#RoleId").val(art.dialog.data("roleIds"));
+                }
+            }
+        });
+    }
+</script>

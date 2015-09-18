@@ -1,0 +1,77 @@
+﻿@{
+    ViewBag.Title = "";
+    Layout = "~/Areas/Home/Views/Shared/_Layout.cshtml";
+}
+<div class="m-content">
+    @using (Html.BeginForm())
+    {
+        <div class="m-form f-cb">
+            <div style="height: 100px;" id="divProcess" class="f-cb marl60 fs14">
+            </div>
+            <div style="height: 100px;" class="f-cb marl60 fs14">
+                @if (ViewBag.Role.Count == 0)
+                {
+                    @:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;暂无数据
+                        }
+                else
+                {
+                    foreach (var item in ViewBag.Role)
+                    {
+                    <label>
+                        <input name="chkRole" type="checkbox" value="@item.Id" />@item.Name
+                    </label>
+                    }
+                }
+            </div>
+            <dl class="f-cb">
+                <dt></dt>
+                <dd>
+                    <input type="hidden" id="hidRoleId" value="@ViewBag.roleIds"/>
+                    <input type="button" class="u-btnblue" value="保存" onclick="Save()" />
+                    <input type="button" value="取消" class="u-btnblue marl20" onclick="art.dialog.close();" /></dd>
+            </dl>
+        </div>
+    }
+</div>
+<script type="text/javascript">
+    $(function () {
+        $("#hidRoleId").val(art.dialog.data("roleIds"));
+        var roleIds = art.dialog.data("roleIds");
+        $("input[name='chkRole']").each(function () {
+            if (roleIds != null && roleIds.indexOf(this.value) != -1) {
+                $(this).attr("checked", "checked");
+                $("#divProcess").append("=>" + this.nextSibling.nodeValue);
+            }
+        });
+
+        $("input[name='chkRole']").click(function () {
+            var process = $("#divProcess").html();
+            var roleIds;
+
+            if ($("#hidRoleId").val() != "") {
+                roleIds = $("#hidRoleId").val().split(',');
+            }
+            else {
+                roleIds = new Array();
+            }
+
+            if (this.checked) {
+                roleIds.push(this.value);
+                process += "=>" + this.nextSibling.nodeValue;
+            }
+            else {
+                roleIds.splice($.inArray(this.value, roleIds), 1);
+                process = process.replace("=&gt;" + this.nextSibling.nodeValue, "");
+            }
+
+            $("#hidRoleId").val(roleIds.join(','));
+            $("#divProcess").html(process);
+        });
+    });
+
+    function Save() {
+        art.dialog.data("roleIds", $("#hidRoleId").val());
+        art.dialog.data("process", $("#divProcess").html());
+        art.dialog.close();
+    } 
+</script>

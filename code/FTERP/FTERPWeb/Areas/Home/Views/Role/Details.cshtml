@@ -1,0 +1,28 @@
+﻿@model FTERPWeb.Models.RoleModel
+@{
+    ViewBag.Title = "角色详情";
+    Layout = "~/Areas/Home/Views/Shared/_Layout.cshtml";
+}
+@section head{
+}
+@Html.RenderNavHtml()
+<div class="m-content">
+    @using (Html.BeginForm())
+    {
+        <div class="m-form f-cb">
+            <dl class="f-cb">
+                <dt>角色名称:</dt>
+                <dd>@Html.DisplayFor(m => m.Name)</dd>
+                <dt>备注:</dt>
+                <dd>
+                    @Html.DisplayFor(m => m.Remark)
+                </dd>
+                <dt></dt>
+                <dd>
+                    <input type="hidden" id="hidCurrentPage" value="@ViewBag.CurrentPage"/>
+                    <input type="button" value="返回" class="u-btnblue marl10" onclick="location.href = '@ViewBag.backUrl'" />
+                </dd>
+            </dl>
+        </div>
+    }
+</div>

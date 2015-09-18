@@ -1,0 +1,115 @@
+﻿@using PetaPoco
+@model Page<FTERPWeb.Models.RoleModel>
+@{
+    ViewBag.Title = "角色列表";
+    Layout = "~/Areas/Home/Views/Shared/_Layout.cshtml";
+}
+@section head{
+}
+@Html.RenderNavHtml()
+<div class="m-content">
+    @using (Html.BeginForm())
+    {
+        <!-- 操作 start -->
+        <div class="m-content">
+            <input type="hidden" id="backType" name="backType" value="@ViewBag.backType"/>
+            <input type="button" value="添加" class="u-btnblue" onclick="window.location.href = '/Home/Role/Add'" />
+            <input type="button" value="编辑" class="u-btnblue" onclick="Redirect({operateName:'编辑',actionUrl:'/Home/Role/Edit?CurrentPage=@ViewBag.CurrentPage'})" />
+            <input type="button" value="删除" class="u-btnblue" onclick="Operate({operateName:'删除',actionUrl:'/Home/Role/Delete',backUrl:'/Home/Role/Index'})" />
+        </div>
+        <!-- 操作 end --> 
+        <!-- search start -->
+        <div class="m-schlist f-cb">
+            <div class="searchU">
+                <div class="searchUP">
+                    角色名称：
+                </div>
+                <div class="searchUP">
+                    <input type="text" id="roleName" name="roleName" class="u-iptm trim" maxlength="15" />
+                </div>
+            </div>
+        </div>     
+        <!-- search end -->
+        <!-- 查询 start -->
+        <div class="m-schlist">
+            <div class="searchU">
+                <div class="searchUP">
+                    每页显示条数：
+                </div>
+                <div class="searchUP">
+                    <input type="text" name="itemsPerPage" class="u-ipts number" maxlength="2" />
+                    <input type="submit" value="查询" class="u-btnblue" />
+                </div>
+            </div>
+        </div>
+        <!-- 查询 end -->
+    }
+    <div class="clear02">
+    </div>
+    <table border="0" class="m-table f-cb mart20">
+        <tr>
+            <th class="f-width30">
+                <input type="checkbox" class="checkall" />
+            </th>
+            <th class="f-width50">
+                序号
+            </th>
+            <th class="f-width100">
+                角色名称
+            </th>
+            <th class="f-width100">
+                创建时间
+            </th>
+        </tr>
+        @if (Model == null || Model.Items.Count == 0)
+        {
+            <tr>
+                <td colspan="4">
+                    暂无数据
+                </td>
+            </tr>
+        }
+        else
+        {
+            int index = FTERPWeb.Common.SysConfig.ItemsPerPage * ((int)Model.CurrentPage - 1);
+            foreach (var item in Model.Items)
+            {
+                index++;
+            <tr>
+                <td>
+                    <input type="checkbox" class="checkone" value="@item.Id" />
+                </td>
+                <td>
+                    @index
+                </td>
+                <td>
+                    <a href="/Home/Role/Details?roleId=@item.Id&CurrentPage=@ViewBag.CurrentPage">@item.Name</a>
+                </td>
+                <td>
+                    @(DateTime.Parse(item.CreateTime.ToString()).ToString("yyyy-MM-dd HH:mm"))
+                </td>
+            </tr>
+            }
+        }
+    </table>
+    <div class="clear02">
+    </div>
+    @Html.RenderHomePage(Model)
+</div>
+<!-- JS -->
+<script type="text/javascript">
+    $(function () {
+        BindCheckAll();
+        var backType = $("#backType").val();
+        var roleName = Common.GetCookie("roleName");
+        if ("1" == backType) {
+            $("#roleName").val(roleName);
+        }
+    });
+
+    $("form").submit(function () {
+        Common.SetCookie("roleName", $("#roleName").val());
+        $("#backType").val("1");
+    });
+</script>
+<!-- /JS -->

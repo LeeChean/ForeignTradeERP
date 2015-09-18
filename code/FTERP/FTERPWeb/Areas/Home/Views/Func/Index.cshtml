@@ -1,0 +1,173 @@
+﻿@model FTERPWeb.Home.ViewModels.EditFuncModel
+@{
+    ViewBag.Title = "模块";
+    Layout = "~/Areas/Home/Views/Shared/_Layout.cshtml";
+}
+@section foot{
+    <script type="text/javascript">
+        var setting = {
+            data: {
+                key: {
+                    name: "Title"
+                },
+                simpleData: {
+                    enable: true,
+                    idKey: 'Id',
+                    pIdKey: 'Pid'
+                }
+            },
+            callback: {
+                onClick: onClick
+            }
+        };
+
+        function onClick(event, treeId, treeNode, clickFlag) {
+            $("#btnAddSub").show();
+            $("#btnAddSameLevel").show();
+            $("#btnSave").show();
+            $("#btnDelete").show();
+            $("#btnAdd").hide();
+
+            $('#Id').val(treeNode['Id']);
+            var parentNode = treeNode.getParentNode();
+            if (parentNode == null) {
+                $('#Pid').val('0');
+                $('#FullPid').val('0');
+            } else {
+                $('#Pid').val(parentNode['Id']);
+                var fullPid = parentNode['FullPid'] + '-' + parentNode['Id'];
+                $('#FullPid').val(fullPid);
+            }
+
+            $('#FuncLevel').val(treeNode.level + 1);
+            $('#Name').val(treeNode['Name']);
+            $('#Title').val(treeNode['Title']);
+            $("input[name='display']").each(function () {
+                if (this.value == treeNode['DisplayFlag']) {
+                    this.checked = true;
+                    $("#DisplayFlag").val(this.value);
+                }
+            });
+            $('#Sortno').val(treeNode['Sortno']);
+            $('#Url').val(treeNode['Url']);
+        }
+
+        $(document).ready(function () {
+            //初始化模块树
+            $.getJSON('/Home/Func/GetFuncTree', function (data) {
+
+                for (var i = 0; i < data.length; i++) {
+                    data[i].open = true;
+                }
+                $.fn.zTree.init($("#ztree"), setting, data);
+            });
+
+            $("#btnAddSub").hide();
+            $("#btnAddSameLevel").hide();
+            $("#btnSave").hide();
+            $("#btnDelete").hide();
+        });
+
+        //添加模块
+        function AddFunc() {
+            Common.Save({ actionUrl: "/Home/Func/Add", backUrl: "/Home/Func/Index" });
+        }
+
+        //添加子模块
+        function AddSubFunc() {
+            if ($('#FuncLevel').val() == '3') {
+                Common.Tip('模块最大层级为3', null);
+                return false;
+            }
+
+            if ($('#Pid').val() == '') {
+                Common.Tip('请先在左侧选择一个模块！', null);
+                return false;
+            }
+
+            Common.Save({ actionUrl: "/Home/Func/AddSub", backUrl: "/Home/Func/Index" });
+        }
+
+        //编辑模块
+        function EditFunc() {
+            Common.Save({ actionUrl: "/Home/Func/Edit", backUrl: "/Home/Func/Index" });
+        }
+
+        //删除模块
+        function DeleteFunc() {
+            if ($('#Id').val() == '') {
+                Common.Tip('请选择要删除的模块!', null);
+                return false;
+            }
+
+            art.dialog.confirm("您确定要删除该模块以及下级模块吗？删除后不可恢复！", function () {
+                $.post("/Home/Func/Delete", { funcId: $('#Id').val() }, function (msg) {
+                    if (msg == "1") {
+                        Common.Success("删除成功", function () { window.location = "/Home/Func/Index"; });
+                    }
+                    else {
+                        Common.Error("删除失败", function () { });
+                    }
+
+                }, "");
+            }, null);
+        }
+    </script>
+}
+@Html.RenderNavHtml()
+<div class="m-content">
+    <div class="m-content">
+        <div class="m-tree">
+            <ul class="ztree" id="ztree">
+            </ul>
+        </div>
+        <div class="m-treeR">
+            <div class="m-form f-cb">
+                @using (Html.BeginForm())
+                {
+                    <!-- mainTable02 start -->
+                    <dl class="f-cb">
+                        <dt><i>*</i>英文名称：</dt>
+                        <dd>@Html.TextBoxFor(m => m.Name, new { @class = "u-iptl" })
+                            @Html.ValidationMessageFor(m => m.Name)</dd>
+                        <dt><i>*</i>中文名称：</dt>
+                        <dd>@Html.TextBoxFor(m => m.Title, new { @class = "u-iptl" })
+                            @Html.ValidationMessageFor(m => m.Title)</dd>
+                        <dt>是否显示：</dt>
+                        <dd>
+                            <label>
+                                <input type="radio" name="display" value="1" checked="checked" onclick="$('#DisplayFlag').val('1')" />是</label>
+                            <label class="marl20">
+                                <input type="radio" name="display" value="0" onclick="$('#DisplayFlag').val('0')" />否</label>
+                            @Html.HiddenFor(model => model.DisplayFlag)</dd>
+                        <dt>序号：</dt>
+                        <dd>@Html.TextBoxFor(m => m.Sortno, new { @class = "u-iptl" })
+                            @Html.ValidationMessageFor(m => m.Sortno)</dd>
+                        <dt>链接url：</dt>
+                        <dd>@Html.TextBoxFor(m => m.Url, new { @class = "u-iptl" })
+                            @Html.ValidationMessageFor(m => m.Url)</dd>
+                        <dt></dt>
+                        <dd>
+                            <input name="input" type="button" id="btnAddSub" value="添加子模块" class="u-btn" onclick="AddSubFunc()" />
+                        </dd>
+                        <dt></dt>
+                        <dd>
+                            <input name="input" type="button" id="btnAddSameLevel" value="添加同级模块" class="u-btn"
+                                onclick="AddFunc()" /></dd>
+                        <dt></dt>
+                        <dd>
+                            <input name="input" type="button" id="btnAdd" value="添加模块" class="u-btnblue" onclick="AddFunc()" />
+                            <input name="input" type="button" id="btnSave" value="保存" class="u-btnblue" onclick="EditFunc()" />
+                            <input name="input" type="button" id="btnDelete" value="删除" class="u-btnblue marl10"
+                                onclick="DeleteFunc()" /></dd>
+                    </dl>
+                    @Html.HiddenFor(m => m.Id)
+                    @Html.HiddenFor(m => m.Pid)
+                    @Html.HiddenFor(m => m.FuncLevel)
+                    @Html.HiddenFor(m => m.FullPid)
+                    <!-- mainTable02 end -->   
+                }
+            </div>
+        </div>
+    </div>
+</div>

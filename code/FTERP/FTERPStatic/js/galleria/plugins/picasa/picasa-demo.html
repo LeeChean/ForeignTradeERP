@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Galleria Flickr Plugin</title>
+        <style>
+
+            /* Demo styles */
+            html,body{background:#222;margin:0;}
+            body{border-top:4px solid #000;}
+            .content{color:#777;font:12px/1.4 "helvetica neue",arial,sans-serif;width:860px;margin:20px auto;}
+            h1{font-size:12px;font-weight:normal;color:#ddd;margin:0;}
+            p{margin:0 0 20px}
+            a {color:#22BCB9;text-decoration:none;}
+            .cred{margin-top:20px;font-size:11px;}
+
+            /* This rule is read by Galleria to define the gallery height: */
+            #galleria{height:540px;}
+
+        </style>
+
+        <!-- load jQuery -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+
+        <!-- load Galleria -->
+        <script src="../../galleria-1.4.2.min.js"></script>
+
+        <!-- load picasa plugin -->
+        <script src="galleria.picasa.min.js"></script>
+
+    </head>
+<body>
+    <div class="content">
+        <h1>照片显示弹窗DEMO</h1>
+        <p>班级相册</p>
+
+        <!-- Adding gallery images. This is just a container for the dynamic picasa images -->
+
+        <div id="galleria">
+		<img src='http://d.hiphotos.baidu.com/image/w%3D310/sign=2c9f2170442309f7e76fab13420c0c39/faf2b2119313b07ea95564ec0ed7912396dd8c6d.jpg'/>
+		<img src='http://d.hiphotos.baidu.com/image/w%3D310/sign=e47bf6e3cafcc3ceb4c0cf32a244d6b7/a50f4bfbfbedab64a0243701f536afc378311e98.jpg'/>
+		<img src='http://g.hiphotos.baidu.com/image/w%3D310/sign=c098c25bd2160924dc25a41ae406359b/f703738da9773912c57e206cfa198618367ae267.jpg'/>
+		<img src='http://e.hiphotos.baidu.com/image/w%3D310/sign=981cd15458b5c9ea62f305e2e538b622/b90e7bec54e736d183a96b5798504fc2d5626933.jpg'/>
+		</div>
+
+        
+    </div>
+    <script>
+
+    // Load the classic theme
+    Galleria.loadTheme('../../themes/classic/galleria.classic.min.js');
+
+    Galleria.run('#galleria', {thumbnails:false
+        // The user & album. This example fetches the album "Demo" from the user "galleriajs"
+        //picasa: 'useralbum:galleriajs/Demo'
+    });
+
+    </script>
+    </body>
+</html>

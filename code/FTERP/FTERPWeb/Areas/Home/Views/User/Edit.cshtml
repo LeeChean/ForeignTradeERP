@@ -1,0 +1,110 @@
+﻿@model FTERPWeb.Home.ViewModels.AddUserModel
+@{
+    ViewBag.Title = "用户编辑";
+    Layout = "~/Areas/Home/Views/Shared/_Layout.cshtml";
+}
+@Html.RenderNavHtml()
+<div class="m-content">
+    <div class="m-form f-cb">
+        @using (Html.BeginForm())
+        {
+            <dl class="f-cb">
+                <dt><i>*</i>登录名：</dt>
+                <dd>@Html.TextBoxFor(model => model.Code, new { @class = "u-iptl trim", @maxlength = "30" })
+                    @Html.ValidationMessageFor(model => model.Code)
+                </dd>
+                <dt><i>*</i>姓名：</dt>
+                <dd>@Html.TextBoxFor(model => model.Name, new { @class = "u-iptl trim", @maxlength = "10" })
+                    @Html.ValidationMessageFor(model => model.Name)
+                </dd>
+                <dt><i>*</i>电话：</dt>
+                <dd>@Html.TextBoxFor(model => model.Phone, new { @class = "u-iptl trim", @maxlength = "20" })
+                    @Html.ValidationMessageFor(model => model.Phone)
+                </dd>
+                <dt>用户编号：</dt>
+                <dd>@Html.TextBoxFor(model => model.No, new { @class = "u-iptl trim", @maxlength = "20" })
+                    @Html.ValidationMessageFor(model => model.No)
+                </dd>
+                <dt>部门：</dt>
+                <dd>
+                    @if (ViewBag.depList != null)
+                    {
+                        int index = 0;
+                        foreach (var item in ViewBag.depList)
+                        {
+                            index++;
+                        @Html.DropDownList("Dep_" + index, item as List<SelectListItem>, new { @class = "u-iptm", @onchange = "GetSubDepartment(this)" })
+                        <span style="width: 10px"></span>
+                        }
+                    }
+
+                </dd>
+                <dt>性别：</dt>
+                <dd>
+                    <label>
+                        <input type="radio" name="Gender" checked value="1" />男</label>
+                    <label class="marl20">
+                        <input type="radio" name="Gender" value="0" />女</label>
+                </dd>
+                <dt>年龄：</dt>
+                <dd>@Html.TextBoxFor(model => model.Age, new { @class = "u-iptl trim", @maxlength = "3" })
+                    @Html.ValidationMessageFor(model => model.Age)
+                </dd>
+                <dt>用户状态：</dt>
+                <dd>
+                    <select id="selStatus" name="Status" class="u-iptm">
+                        <option value="0">在职</option>
+                        <option value="1">离职</option>
+                        <option value="2">休假</option>
+                    </select>
+                </dd>
+                <dt>邮箱：</dt>
+                <dd>@Html.TextBoxFor(model => model.Email, new { @class = "u-iptl trim", @maxlength = "50" })
+                    @Html.ValidationMessageFor(model => model.Email)
+                </dd>
+            </dl>
+            <dl class="f-cb">
+                <dt></dt>
+                <dd>
+                    <input type="button" value="保存" class="u-btnblue" onclick="Common.Save({ actionUrl: '/Home/User/Edit', backUrl: '@ViewBag.backUrl' });" />
+                    <input type="button" value="返回" class="u-btnblue marl10" onclick="location.href = '@ViewBag.backUrl';" /></dd>
+            </dl>
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.Departmentid)
+            @Html.HiddenFor(model => model.Status)
+        }
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $("#selStatus").change(function () {
+            $("#Status").val(this.value);
+        });
+
+        var depArray = "@ViewBag.depIdList".split('-');
+        for (var j = 0; j < depArray.length; j++) {
+            $("#Dep_" + (j + 1)).val(depArray[j]);
+        }
+
+        $("input[name='Gender']").each(function () {
+            if (this.value == "@Model.Gender") {
+                $(this).attr("checked", true);
+            }
+        });
+
+        $("#selStatus").val("@Model.Status");
+    });
+
+    function GetSubDepartment(obj) {
+        $("#Departmentid").val($(obj).val());
+
+        var id = "Dep_" + (parseInt($(obj).attr("id").split('_')[1]) + 1);
+        $.post("/Home/User/SubDepartment?id=" + id + "&depId=" + $(obj).val(), function (data) {
+            if (null != data && data != "") {
+                var parent = $(obj).parent();
+                $(obj).nextAll().remove();
+                parent.append(" " + $.trim(data));
+            }
+        });
+    }
+</script>

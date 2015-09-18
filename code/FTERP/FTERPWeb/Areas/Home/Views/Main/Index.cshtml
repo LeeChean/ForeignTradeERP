@@ -1,0 +1,119 @@
+﻿@model FTERPWeb.Home.ViewModels.IndexModel
+@using FTERPCommon
+@using FTERPWeb.Common
+@{
+    ViewBag.Title = "管理平台";
+    Layout = "~/Areas/Home/Views/Shared/_Layout.cshtml";
+}
+@section foot
+{
+    @Html.StaticFor("/js/Common/menu.js")
+    <script language="javascript" type="text/javascript">
+        //Iframe高度自适应
+        function frameload() {
+            var iframe = $('#mainRigh');
+
+            iframe.height(440);
+            var iheight = iframe.contents().height();
+
+            if (iheight < 440) {
+                iheight = 420;
+            }
+            iframe.height(iheight + 20);
+        }
+
+        $(function () {
+            $("#mainRigh").load(function () {
+                frameload();
+            });
+        });
+
+
+    </script>
+}
+<div class="g-nav f-cb">
+    <div class="m-nav">
+        <i>所属角色(@string.Join(",", SysConfig.CurrentRoleNames))</i><i>所属部门(@SysConfig.CurrentDepartment)
+        </i><i>用户(@SysConfig.CurrentUser.Name)</i> @*<i><a href="/Home/Login/Logout">【退出】</a></i><i><a href="/Home/Main/EditPwd" target="mainRigh">【修改密码】</a></i><i>您好 @(FTERPWeb.Common.SysConfig.CurrentUser.Name + "(" + string.Join(",", FTERPWeb.Common.SysConfig.CurrentRoleNames) + ")")，欢迎您登录</i>*@
+    </div>
+</div>
+<div class="g-hd">
+    <div class="m-hd f-cb">
+        <div class="m-logo">
+            <a href="">
+                <img alt="管理平台" src="@Html.StaticFor("/css/home/Images/bslogo.png")"></a><i>管理平台</i>
+        </div>
+        <div class="m-menu">
+            @if (null != SysConfig.CurrentAuthInfo)
+            {
+                <ul>
+                    @{
+                        <li class="z-crt"><a href="/Home/Main/UnapprovedIndex" target="mainRigh">首页</a></li>
+                foreach (var item in SysConfig.CurrentAuthInfo.Where(f => f.Pid == 0 && f.DisplayFlag == 1))
+                {
+                        <li><a menuId="@item.Id">@item.Title</a></li>
+                }
+                    }
+                </ul>
+            }
+        </div>
+    </div>
+</div>
+<div class="g-bd f-cb">
+    <div class="m-main">
+        <!-- 左侧 -->
+        <div class="g-sd">
+            <!-- 左侧菜单 -->
+            <div class="m-sd">
+                <!-- 个人信息 -->
+                <div class="f-cb psinfo">
+                    <div class="m-content mart15 f-cb">
+                        <a href="/Home/Main/EditPwd" target="mainRigh"><i class="ico-set marr5"></i>修改密码</a><a
+                            class="marl30" href="/Home/Login/Logout"><i class="ico-exit marr5"></i>退出</a>
+                    </div>
+                </div>
+                <!-- /个人信息 -->
+                <!-- 菜单 -->
+                <div class="f-cb sdnav">
+                    @if (null != SysConfig.CurrentAuthInfo && SysConfig.CurrentAuthInfo.Count > 0)
+                    {
+                        <ul>
+                            @foreach (var item in SysConfig.CurrentAuthInfo.Where(f => f.Pid == 0 && f.DisplayFlag == 1))
+                            {
+                                foreach (var menu in SysConfig.CurrentAuthInfo.Where(m => m.Pid == item.Id.ToInt() && m.DisplayFlag == 1))
+                                {
+                                    var cssName = "scdli z-hide";
+                                    //if (item.Id != SysConfig.CurrentAuthInfo.Where(f => f.Pid == 0 && f.DisplayFlag == 1).FirstOrDefault().Id)
+                                    //{
+                                    //    cssName += " z-hide";
+                                    //}
+                                <li pid="@item.Id" class="@cssName"><a class="fst" href="javascript:void(0);" target="mainRigh">
+                                    <span>@menu.Title</span><i></i></a>
+                                    <ul class="scd">
+                                        @foreach (var subMenu in SysConfig.CurrentAuthInfo.Where(m => m.Pid == menu.Id.ToInt() && m.DisplayFlag == 1))
+                                        {
+                                            <li><a href="@subMenu.Url" target="mainRigh"><i></i>@subMenu.Title</a></li>
+                                        }
+                                    </ul>
+                                </li>
+                                }
+                            }
+                        </ul>
+                    }
+                </div>
+                <!-- /菜单 -->
+            </div>
+            <!-- /左侧菜单 -->
+        </div>
+        <!-- /左侧 -->
+        <!-- 主体内容 -->
+        <div class="g-mn">
+            <div class="g-mnc f-cb" style="min-width: 900px;">
+                <iframe id="mainRigh" width="100%" name="mainRigh" style="min-width: 900px;" frameborder="0"
+                    src="/Home/Main/UnapprovedIndex"></iframe>
+            </div>
+        </div>
+        <!-- /主体内容 -->
+    </div>
+</div>
+@Html.Partial("FootPartialView")

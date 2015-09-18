@@ -1,0 +1,59 @@
+﻿@model FTERPWeb.Home.ViewModels.AddUserModel
+@{
+    ViewBag.Title = "用户详情";
+    Layout = "~/Areas/Home/Views/Shared/_Layout.cshtml";
+}
+@Html.RenderNavHtml()
+<div class="m-content">
+    <div class="m-form f-cb">
+        @using (Html.BeginForm())
+        {
+            <dl class="f-cb">
+                <dt>登录名：</dt>
+                <dd>@Html.DisplayFor(m => m.Code)
+                </dd>
+                <dt>姓名：</dt>
+                <dd>@Html.DisplayFor(m => m.Name)
+                </dd>
+                <dt>电话：</dt>
+                <dd>@Html.DisplayFor(m => m.Phone)
+                </dd>
+                <dt>用户编号：</dt>
+                <dd>@Html.DisplayFor(m => m.No)
+                </dd>
+                <dt>部门：</dt>
+                <dd>@ViewBag.department</dd>
+                <dt>性别：</dt>
+                <dd>
+                    @(Model.Gender == 0 ? "女" : "男")
+                </dd>
+                <dt>年龄：</dt>
+                <dd>@Html.DisplayFor(m => m.Age)
+                </dd>
+                <dt>用户状态：</dt>
+                <dd>
+                    @switch (Model.Status)
+                    {
+                        case 0:
+                        @:在职
+                            break;
+                        case 1:
+                        @:离职
+                            break;
+                        case 2:
+                        @:休假
+                            break;
+                    }
+                </dd>
+                <dt>邮箱：</dt>
+                <dd>@Html.DisplayFor(m => m.Email)
+                </dd>
+            </dl>
+            <dl class="f-cb">
+                <dt></dt>
+                <dd>
+                    <input type="button" value="返回" class="u-btnblue marl10" onclick="location.href = '@ViewBag.backUrl';" /></dd>
+            </dl>
+        }
+    </div>
+</div>

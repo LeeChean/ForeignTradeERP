@@ -1,0 +1,117 @@
+﻿@using FTERPCommon
+@model FTERPWeb.Home.Models.IndexModel
+@{
+    ViewBag.Title = "管理平台";
+    Layout = "~/Areas/Home/Views/Shared/_Layout.cshtml";
+}
+@section foot
+{
+    @Html.StaticFor("/js/Common/menu.js")
+    <script language="javascript" type="text/javascript">
+        //Iframe高度自适应
+        function frameload() {
+            var iframe = $('#mainRigh');
+
+            iframe.height(800);
+            var iheight = iframe.contents().height();
+
+            if (iheight < 800) {
+                iheight = 800;
+            }
+            iframe.height(iheight + 20);
+        }
+
+        $(function () {
+            $("#mainRigh").load(function () {
+                frameload();
+            });
+        });
+
+
+    </script>
+}
+<div class="g-nav f-cb">
+    <div class="m-nav">
+        <i><a href="/Home/Login/Logout">【退出】</a></i><i>您好 @(FTERPWeb.Common.SysConfig.CurrentUser.Name + "(" + string.Join(",", FTERPWeb.Common.SysConfig.CurrentRoleNames) + ")")，欢迎您登录</i>
+    </div>
+</div>
+<div class="g-hd">
+    <div class="m-hd f-cb">
+        <div class="m-logo">
+            <a href="">
+                <img alt="管理平台" src="@Html.StaticFor("/css/home/Images/bslogo.png")"></a><i>管理平台</i>
+        </div>
+        <div class="m-menu">
+            @if (null != Model.funcList && Model.FirstLevelFunc.Count > 0)
+            {
+                <ul>
+                    @{
+                int ti = 0;
+                foreach (var item in Model.funcList.Where(m => m.Pid == 0))
+                {
+                    var css = "";
+                    if (ti == 0)
+                    {
+                        css = "z-crt";
+                        ti++;
+                    } 
+                        <li class="@css"><a menuId="@item.Id">@item.Title</a></li>
+                }
+                    }
+                </ul>
+            }
+        </div>
+    </div>
+</div>
+<div class="g-bd f-cb">
+    <div class="m-main">
+        <!-- 左侧 -->
+        <div class="g-sd">
+            <!-- 左侧菜单 -->
+            <div class="m-sd">
+                <!-- 个人信息 -->
+                <!-- /个人信息 -->
+                <!-- 菜单 -->
+                <div class="f-cb sdnav">
+                    @if (null != Model.funcList && Model.funcList.Count > 0)
+                    {
+                        <ul>
+                            @foreach (var item in Model.funcList.Where(m => m.Pid == 0))
+                            {
+                                foreach (var menu in Model.funcList.Where(m => m.Pid == item.Id.ToInt()))
+                                {
+                                    var cssName = "scdli";
+                                    if (item.Id != Model.FirstLevelFunc.FirstOrDefault().Id)
+                                    {
+                                        cssName += " z-hide";
+                                    }
+                                <li pid="@item.Id" class="@cssName"><a class="fst" href="javascript:void(0);" target="mainRigh">
+                                    <span>@menu.Title</span><i></i></a>
+                                    <ul class="scd">
+                                        @foreach (var subMenu in Model.funcList.Where(m => m.Pid == menu.Id.ToInt()))
+                                        {
+                                            <li><a href="@subMenu.Url" target="mainRigh"><i></i>@subMenu.Title</a></li>
+                                        }
+                                    </ul>
+                                </li>
+                                }
+                            }
+                        </ul>
+                    }
+                </div>
+                <!-- /菜单 -->
+            </div>
+            <!-- /左侧菜单 -->
+        </div>
+        <!-- /左侧 -->
+        <!-- 主体内容 -->
+        <div class="g-mn">
+            <div class="g-mnc f-cb" style="min-width: 900px;">
+                <iframe id="mainRigh" width="100%" name="mainRigh" style="min-width: 900px;" frameborder="0"
+                    height="800"></iframe>
+            </div>
+        </div>
+        <!-- /主体内容 -->
+    </div>
+</div>
+@Html.Partial("FootPartialView")

@@ -1,0 +1,241 @@
+﻿@charset "utf-8";
+/* CSS Document */
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, button, textarea, p, blockquote, th, td {padding:0;margin:0;}
+fieldset, img, html, body, iframe, button , textarea, input{border:none;}
+table {border-collapse:collapse;border-spacing:0;}
+li {list-style:none;}
+em, i, small, caption, th {font-weight:normal;font-style:normal;font-size:100%;}
+h1, h2, h3, h4, h5, h6, em, strong, b {font-weight:bold;font-size:100%;}
+caption{text-align:left;}
+body {word-wrap:break-word; font:14px/normal  "微软雅黑", tahoma, arial, "宋体"!important;color:#666;background:#fff;}
+textarea, input, button, select, pre {outline:0;font-size:inherit;line-height:inherit;color:inherit;font-family:inherit;}
+textarea{overflow:auto;resize:none;}
+input,textarea{padding:0 3px;}
+a, button, input[type="button"], input[type="submit"]{cursor:pointer;outline:0; font-family:"微软雅黑", tahoma, arial, "宋体"!important;}
+input[type=button], input[type="submit"]{-webkit-appearance:none;outline:none;}/* 清除IOS下按钮的原生样式 */
+a{color:#666; text-decoration:none;}
+a:hover{color:#00cad9;}
+label{margin-left:5px;}
+select{white-space:nowrap;}
+
+
+
+/* 勾选框 */
+input[type="checkbox"],input[type="radio"]{vertical-align:-2px; *vertical-align:middle; margin-right:3px;}
+input[type="checkbox"]{vertical-align:-2px;}
+
+.g-in{position:relative;width:1200px; margin:0 auto;}
+.g-in:after{display:block;visibility:hidden;height:0;overflow:hidden;clear:both;content:".";}
+.f-usn {-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none;}
+
+/* 浮动 */
+.f-fl{float:left!important;}
+.f-fr{float:right!important;}
+.f-tal{text-align:left!important;}
+.f-tac{text-align:center!important;}
+.f-tar{text-align:right!important;}
+
+/* 距离 */
+.marl0{margin-left:0px!important;}
+.marl5{margin-left:5px!important;}
+.marl10{margin-left:10px!important;}
+.marl15{margin-left:15px!important;}
+.marl20{margin-left:20px!important;}
+.marl30{margin-left:30px!important;}
+.marl35{margin-left:35px!important;}
+.marl40{margin-left:40px!important;}
+.marl60{margin-left:60px!important;}
+.marl170{margin-left:170px!important;_margin-left:120px!important;}
+.marr5{margin-right:5px!important;}
+.marr10{margin-right:10px!important;}
+.mart2{margin-top:2px!important;}
+.mart4{margin-top:4px!important;}
+.mart5{margin-top:5px!important;}
+.mart7{margin-top:7px!important;}
+*+html .mart5ie7{margin-top:0!important;}
+.mart0{margin-top:0px!important;}
+.mart10{margin-top:10px!important;}
+.mart12{margin-top:12px!important;}
+.mart15{margin-top:15px!important;}
+.mart20{margin-top:20px!important;}
+.mart30{margin-top:30px!important;}
+.mart40{margin-top:40px!important;}
+.mart60{margin-top:60px!important;}
+.mart70{margin-top:70px!important;}
+.mart111{margin-top:111px!important;}
+.marb10{ margin-bottom:10px!important;}
+.marb20{ margin-bottom:20px!important;}
+.marb30{ margin-bottom:30px!important;}
+.pad0{padding:0!important;}
+.pad10{padding:10px!important;}
+.pad20{padding:20px!important;}
+.padt0{padding-top:0!important;}
+.padt12{padding-top:12px!important;}
+.padt15{padding-top:15px!important;}
+.padt25{padding-top:25px!important;}
+.padr15{padding-right: 15px!important;}
+.padr20{padding-right:20px!important;}
+.padtb10{padding:10px 0!important;}
+.padr0{ padding-right:0!important;}
+.padt5{ padding-top:5px!important;}
+.padb25{ padding-bottom:25px!important;}
+.padb40{ padding-bottom:40px!important;}
+.padb60{ padding-bottom:60px!important;}
+.padb103{ padding-bottom:103px!important;}
+.padlr45{ padding:0 45px!important;}
+
+
+/* 清除浮动 */
+.f-cb {clear:both;zoom:1;}
+.f-cb:after {clear:both;display:block;visibility:hidden;height:0;overflow:hidden;content:".";}
+
+/* 底部 */
+.g-ft{padding:30px 0; margin-top:20px; min-width:1200px; font-size:12px; background-color:#eeeeee; border-top:1px solid #dddddd;}
+.g-ft .g-in{width:1000px; margin:0 auto; position:static;}
+.g-ft .g-in:after{display:block;visibility:hidden;height:0;overflow:hidden;clear:both;content:".";}
+.m-ft{line-height:25px;text-align:center; color:#676767;}
+
+/* 清除背景 */
+.f-bgnone{ background:none!important;}
+
+/* 清除投影 */
+.f-bsnone{box-shadow:none!important;}
+
+/* 字体颜色 */
+.z-err{ color:#F00!important;}/* 红色 */
+.z-red{color:#c0272d!important;;}/* 深红色 */
+.z-testrgt{color:#5eac46!important;}/* 绿色 */
+.z-blue{color:#009ec0!important;}/* 蓝色 */
+.z-bluedep{color:#00a09d!important;}/* 灰蓝色 */
+.z-bluedp{ color:#4c8794!important;}/* 深蓝色 */
+.z-bluebk{ color:#42646b!important;}/* 黑蓝色 */
+.z-gray{ color:#bbb!important;}/* 浅灰色 */
+.z-orange{ color:#FF8000!important;}/* 橙色 */
+.z-black{ color:#333!important;}/* 浅黑色 */
+.z-grayb{ color:#ccc!important;}/* 浅灰色 */
+.z-yellow{ color:#fcb419!important;}/* 黄色 */
+.z-yellowd{color:#ffa200!important;}/* 深黄色 */
+.z-white{color:#ffffff!important;}/* 白色 */
+
+/* 去掉边框 */
+.f-bdnone{border:none!important;}
+.f-bddnone{border-bottom:none!important;}
+.f-bddas{ border-bottom:1px dashed #dddddd!important;}/* 灰色虚线底边框 */
+.f-bdsld{ border:1px solid #dddddd!important;}/* 灰色实线边框 */
+.f-bdsldl{ border-left:1px solid #dddddd!important;}/* border 左 */
+.f-bdsldr{ border-right:1px solid #dddddd!important;}/* border 右 */
+
+/* 字体大小 */
+.fs12{ font-size:12px!important;}
+.fs14{ font-size:14px!important;}
+.fs16{ font-size:16px!important;}
+.fs18{ font-size:18px!important;}
+.fs20{ font-size:20px!important;}
+.fs24{ font-size:24px!important;}
+.fs26{ font-size:26px!important;}
+
+/* 缩进 */
+.ti25{ text-indent:25px;}
+.ti40{ text-indent:40px;}
+
+/* 隐藏 */
+.z-hide{ display:none!important;}
+
+/* 显示 */
+.z-show{ display:inline-block!important;}
+
+/* 滚动条 */
+.f-oy{ overflow-x:hidden!important; overflow-y:auto!important;}
+
+/* 宽度 */
+.f-width80{width:80px!important;}/* 两个操作 两个字 */
+.f-width100{width:100px!important;}
+.f-width112{width:112px!important;}/* 两个操作 一个两个字 一个四个字 */
+.f-width120{width:120px!important;}/* 三个操作 两个两个字 一个四个字个字 */
+.f-width150{width:150px!important;}/* 三个操作 两个两个字 一个四个字个字 */
+.f-width160{width:160px!important;}
+.f-width167{width:167px!important;}
+.f-width178{width:178px!important;}
+.f-width232{width:232px!important;}
+.f-width250{width:250px!important;}
+.f-width276{width:276px!important;width:258px\0!important;*width:262px!important;}
+.f-width288{width:288px!important;}
+.f-width320{width:320px!important;}
+.f-width400{width:400px!important;}
+.f-width475{width:475px!important;}
+.f-width488{width:488px!important;}
+.f-width500{width:500px!important;}
+.f-width580{width:580px!important;}
+.f-width620{width:620px!important;}
+.f-width700{width:700px!important;}
+
+/* 高度 */
+.f-height99{ height:99px!important;}
+.f-height145{ height:145px!important;}
+.f-height205{ height:205px!important;}
+.f-height225{ height:225px!important;}
+.f-height241{ height:241px!important;}
+.f-height269{ height:269px!important;}
+.f-height285{ height:285px!important;}
+.f-height380{ height:380px!important;}
+.f-height464{ height:464px!important;}
+.f-height486{ height:486px!important;}
+
+/* 粗体 */
+.f-fwb{ font-weight:bold;}
+
+/* 居左位置 */
+.f-left40{left:40px!important;}
+.f-left115{left:115px!important;}
+.f-left190{left:190px!important;}
+
+
+/* 背景颜色 */
+.f-bgclredl{background-color:#fff4f4!important;}/* 做错题颜色 */
+.f-bgipt{background-color:#fff!important;}/* 忘记密码input框颜色 */
+.f-bgbluel{background-color:#eefcfd!important;}/* 表格置顶浅蓝 */
+
+/* 小手 */
+.u-hand{ cursor:pointer!important;}
+/* 去掉小手 */
+.u-nohand{ cursor:default!important;}
+
+/* 置灰 */
+.filterGray{color:gray!important; -webkit-filter: grayscale(100%);-moz-filter:grayscale(100%); -ms-filter:grayscale(100%); -o-filter: grayscale(100%); filter:grayscale(100%);filter:gray;opacity:0.4;-moz-opacity:0.4;cursor:default!important;}
+.filterGray:hover{cursor:default;color:#gray;}
+
+/* ----yzy----- */
+/* 分页 */
+.m-page{ clear:both;padding:20px 20px 0 0;text-align:right;line-height:26px;font-size:0;letter-spacing:-0.307em;*letter-spacing:normal;*word-spacing:-1px;word-wrap:normal;white-space:nowrap;color:#666;}
+.m-page a, .m-page i{display:inline-block;*display:inline;*zoom:1;vertical-align:top;margin:0 2px;font-size:12px;letter-spacing:normal;word-spacing:normal; width:26px; height:26px; color:#666; text-align:center;}
+.m-page i{line-height:19px;}
+.m-page a:hover{text-decoration:none;color:#00cad9;}
+.m-page a.begin, .m-page a.first, .m-page a.last, .m-page a.end, .m-page a:hover.begin, .m-page a:hover.end, .m-page a:hover.first, .m-page a:hover.last, .m-page a.page, .m-page a:hover.page, .m-page i, .ico-begin, .ico-first, .ico-last, .ico-end, .m-page a.z-dis, .m-page a.z-dis, .m-page a.z-dis:hover, .m-page a.z-dis:hover, .m-page a.z-dis:active, .m-page a.z-dis:active, .m-page a.z-dis1, .m-page a.z-dis1, .m-page a.z-dis1:hover, .m-page a.z-dis1:hover, .m-page a.z-dis1:active, .m-page a.z-dis1:active{ background:url(Images/icoPage.png) no-repeat;}
+.m-page a.begin, .m-page a.end{background-position:0 0;}
+.m-page a:hover.begin, .m-page a:hover.end{background-position:0 -30px;}
+.m-page a.first, .m-page a.last{background-position:-27px 0;}
+.m-page a:hover.first, .m-page a:hover.last{background-position:-27px -30px;}
+.m-page a.page, .m-page i{background-position:-55px 0;}
+.m-page a:hover.page, .m-page a.z-crt{background-position: -55px -30px;}
+.ico-begin, .ico-first, .ico-last, .ico-end{ display:inline-block; width:9px; height:13px;}
+.ico-begin{background-position:-1px -61px; margin-top:7px; margin-left:1px;}
+.ico-first{background-position:-13px -61px; margin-top:7px;}
+.ico-last{background-position:-23px -61px; margin-top:7px; margin-left:3px;}
+.ico-end{background-position:-34px -61px; margin-top:7px; margin-left:1px;}
+.m-page a.z-dis, .m-page a.z-dis, .m-page a.z-dis:hover, .m-page a.z-dis:hover, .m-page a.z-dis:active, .m-page a.z-dis:active{cursor:default;background-position:-82px 0;}
+.m-page a.z-dis1, .m-page a.z-dis1, .m-page a.z-dis1:hover, .m-page a.z-dis1:hover, .m-page a.z-dis1:active, .m-page a.z-dis1:active{cursor:default;background-position:-108px 0;}
+
+
+/* --------- */
+/* 弹窗内容 */
+.m-pop{margin:0 auto; width:100% auto; background-color:#FFFFFF;}
+
+/* 操作成功 失败 */
+.m-hintss, .m-hintfs{float:left; padding:0 20px; width:100% auto; height:98px;}
+.m-hintss em, .m-hintfs em{ display:inline-block; margin-left:80px; line-height:98px; font-size:20px;}
+/* 操作成功 */
+.m-hintss{background:url(Images/hintSS.png) 20px bottom no-repeat #FFFFFF;}
+.m-hintss em{color:#00cad9;}
+/* 操作失败 */
+.m-hintfs{background:url(Images/hintFS.png) 20px bottom no-repeat #FFFFFF;}
+.m-hintfs em{color:#ff587f;}

@@ -1,0 +1,201 @@
+﻿@using PetaPoco
+@using FTERPCommon
+@model Page<FTERPWeb.Home.ViewModels.ApproveIndexModel>
+@{
+    ViewBag.Title = "审批规则列表";
+    Layout = "~/Areas/Home/Views/Shared/_Layout.cshtml";
+}
+@Html.RenderNavHtml()
+<div class="m-content">
+    @using (Html.BeginForm())
+    {
+        <!-- 操作 start -->
+        <div class="m-content">
+            <input type="hidden" id="backType" name="backType" value="@ViewBag.backType"/>
+            <input type="button" value="添加" class="u-btnblue" onclick="window.location.href = '/Home/ApprovalRule/Add'" />
+            <input type="button" value="编辑" class="u-btnblue" onclick="Edit()" />
+            <input type="button" value="删除" class="u-btnblue" onclick="Delete()" />
+        </div>
+        <!-- 操作 end -->
+        <!-- search start -->       
+        <div class="m-schlist f-cb">
+            <div class="searchU">
+                <div class="searchUP">
+                    单据类别：
+                </div>
+                <div class="searchUP">
+                    @Html.DropDownList("type", ViewBag.Type as List<SelectListItem>, "全部", new { @class = "u-iptm" })
+                </div>
+            </div>
+            <div class="searchU">
+                <div class="searchUP">
+                    部门：
+                </div>
+                <div class="searchUP">
+                    <input type="text" id="department" name="department" class="u-iptm trim" />
+                </div>
+            </div>
+            @*<div class="searchU">
+                <div class="searchUP">
+                    是否有效：
+                </div>
+                <div class="searchUP">
+                    <select id="delFlag" name="delFlag" class="u-iptm">
+                        <option value="">全部</option>
+                        <option value="0">是</option>
+                        <option value="1">否</option>
+                    </select>
+                </div>
+            </div>*@
+        </div>      
+        <!-- search end -->
+        
+        <!-- 查询 start -->
+        <div class="m-schlist">
+            <div class="searchU">
+                <div class="searchUP">
+                    每页显示条数：
+                </div>
+                <div class="searchUP">
+                    <input type="text" name="itemsPerPage" class="u-ipts number" maxlength="2" />
+                    <input type="submit" value="查询" class="u-btnblue" />
+                </div>
+            </div>
+        </div>
+        <!-- 查询 end -->
+    }
+    <table border="0" class="m-table f-cb mart20">
+        <tr>
+            <th class="f-width30">
+                <input type="checkbox" class="checkall" />
+            </th>
+            <th class="f-width100">
+                部门
+            </th>
+            <th class="f-width30">
+                单据类别
+            </th>
+            <th class="f-width120">
+                审批规则
+            </th>
+            @*<th class="f-width50">
+                是否有效
+            </th>*@
+            <th class="f-width100">
+                创建时间
+            </th>
+        </tr>
+        @if (Model.Items.Count == 0)
+        {
+            <tr>
+                <td colspan="5">
+                    暂无数据
+                </td>
+            </tr> 
+        }
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>
+                    <input type="checkbox" class="checkone" value="@item.Id" />
+                </td>
+                <td>
+                    @item.Department
+                </td>
+                <td>
+                    @item.DocType
+                </td>
+                <td>
+                    @item.Process
+                </td>
+                @*<td>
+                    @item.DelFlag
+                </td>*@
+                <td>
+                    @item.CreateTime
+                </td>
+            </tr> 
+        }
+    </table>
+    @Html.RenderHomePage(Model)
+</div>
+<script type="text/javascript">
+    $(function () {
+        var backType = $("#backType").val();
+        var type = Common.GetCookie("type");
+
+        var department = Common.GetCookie("department");
+        //var delFlag = Common.GetCookie("delFlag");
+
+        if ("1" == backType) {
+            $("#type").val(null == type ? "" : type);
+            $("#department").val(null == department ? "" : department);
+
+            //$("#delFlag").val(null == delFlag ? "" : delFlag);
+        }
+
+        BindCheckAll();
+    });
+
+    $("form").submit(function () {
+        //将查询条件放入Cookie中
+        Common.SetCookie("type", $("#type").val());
+        Common.SetCookie("department", $("#department").val());
+
+        //Common.SetCookie("delFlag", $("#delFlag").val());
+        $("#backType").val("1");
+    });
+
+    function Edit() {
+        if ($('.checkone:checked').length == 0) {
+            Common.Tip("您尚未选择要编辑的记录！", null);
+        }
+        else if ($('.checkone:checked').length > 1) {
+            Common.Tip("请选择一条记录进行编辑！", null);
+        }
+        else {
+            $.get("/Home/ApprovalRule/HasApprovingDocument?ruleId=" + $('.checkone:checked').val(), function (msg) {
+                if (msg == "1") {
+                    Common.Tip("有单据使用此规则，不能编辑！", function () { });
+                }
+                else {
+                    window.location.href = "/Home/ApprovalRule/Edit?CurrentPage=@ViewBag.CurrentPage&id=" + $('.checkone:checked').val();
+                }
+            });
+        }
+    }
+
+    function Delete() {
+        if ($('.checkone:checked').length == 0) {
+            Common.Tip("您尚未选择要删除的记录！", null);
+        } else {
+            art.dialog.confirm("您确定要删除所选记录吗？", function () {
+                $.get("/Home/ApprovalRule/HasApprovingDocument?ruleId=" + $('.checkone:checked').val(), function (msg) {
+                    if (msg == "1") {
+                        Common.Tip("有单据使用此规则，不能删除！", function () { });
+                    }
+                    else {
+                        var idArray = new Array();
+                        for (var j = 0; j < $('.checkone:checked').length; j++) {
+                            idArray.push($('.checkone:checked').eq(j).val());
+                        }
+
+                        $.post("/Home/ApprovalRule/Delete", { id: idArray.join(',') }, function (msg) {
+                            if (msg == "1") {
+                                Common.Success("删除成功", function () {
+                                    window.location = "/Home/ApprovalRule/Index";
+                                });
+                            }
+                            else if (msg == "0") {
+                                Common.Error("删除失败", function () { });
+                            }
+                            else {
+                                Common.Tip(msg, function () { });
+                            }
+                        }, "");
+                    }
+                });
+            }, null);
+        }
+    }
+</script>

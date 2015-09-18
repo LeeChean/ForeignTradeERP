@@ -1,0 +1,307 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{587444A7-3CA0-4AE2-9129-82C63EF8260D}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FTERPWeb</RootNamespace>
+    <AssemblyName>FTERPWeb</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Aspose.Cells, Version=4.7.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\Aspose.Cells.dll</HintPath>
+    </Reference>
+    <Reference Include="Aspose.Words, Version=9.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\Aspose.Words.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NLog">
+      <HintPath>Lib\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20710.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Areas\Home\Controllers\AccessController.cs" />
+    <Compile Include="Areas\Home\Controllers\ApprovalRuleController.cs" />
+    <Compile Include="Areas\Home\Controllers\ClientController.cs" />
+    <Compile Include="Areas\Home\Controllers\CommodityController.cs" />
+    <Compile Include="Areas\Home\Controllers\DepAccessController.cs" />
+    <Compile Include="Areas\Home\Controllers\DepartmentController.cs" />
+    <Compile Include="Areas\Home\Controllers\FuncController.cs" />
+    <Compile Include="Areas\Home\Controllers\LogController.cs" />
+    <Compile Include="Areas\Home\Controllers\LoginLogController.cs" />
+    <Compile Include="Areas\Home\Controllers\MainController.cs" />
+    <Compile Include="Areas\Home\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Home\Controllers\RoleController.cs" />
+    <Compile Include="Areas\Home\Controllers\SupplierController.cs" />
+    <Compile Include="Areas\Home\Controllers\UserController.cs" />
+    <Compile Include="Areas\Home\Controllers\ValidateController.cs" />
+    <Compile Include="Areas\Home\HomeAreaRegistration.cs" />
+    <Compile Include="Areas\Home\ViewModels\AddApprovalModel.cs" />
+    <Compile Include="Areas\Home\ViewModels\ApprovalProgressViewModel.cs" />
+    <Compile Include="Areas\Home\ViewModels\ApproveIndexModel.cs" />
+    <Compile Include="Areas\Home\ViewModels\ClientViewModel.cs" />
+    <Compile Include="Areas\Home\ViewModels\AddRoleModel.cs" />
+    <Compile Include="Areas\Home\ViewModels\CommodityIndexModel.cs" />
+    <Compile Include="Areas\Home\ViewModels\CommodityViewModel.cs" />
+    <Compile Include="Areas\Home\ViewModels\DepAccessModel.cs" />
+    <Compile Include="Areas\Home\ViewModels\EditPwdViewModel.cs" />
+    <Compile Include="Areas\Home\ViewModels\LogIndexModel.cs" />
+    <Compile Include="Areas\Home\ViewModels\LoginLogIndexModel.cs" />
+    <Compile Include="Areas\Home\ViewModels\SupplierViewModel.cs" />
+    <Compile Include="Areas\Home\ViewModels\AddUserModel.cs" />
+    <Compile Include="Areas\Home\ViewModels\ClientIndexModel.cs" />
+    <Compile Include="Areas\Home\ViewModels\EditDepartmentModel.cs" />
+    <Compile Include="Areas\Home\ViewModels\EditFuncModel.cs" />
+    <Compile Include="Areas\Home\ViewModels\IndexModel.cs" />
+    <Compile Include="Areas\Home\ViewModels\RoleAccessModel.cs" />
+    <Compile Include="Areas\Home\ViewModels\SupplierIndexModel.cs" />
+    <Compile Include="Areas\Home\ViewModels\UnapprovedIndexModel.cs" />
+    <Compile Include="Areas\Home\ViewModels\UserIndexModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\CommonMethod.cs" />
+    <Compile Include="Common\ExcelHelper.cs" />
+    <Compile Include="Common\Filter\TimeoutAttribute.cs" />
+    <Compile Include="Common\Filter\UserAuthorizeAttribute.cs" />
+    <Compile Include="Common\HtmlExtend.cs" />
+    <Compile Include="Common\ImgHelper.cs" />
+    <Compile Include="Common\SqlHelper.cs" />
+    <Compile Include="Common\SysConfig.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DefaultConnectionDB.cs" />
+    <Compile Include="Models\Generated\Database.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PetaPoco.cs" />
+    <Compile Include="Models\Record.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Global.asax" />
+    <Content Include="Lib\Aspose.Cells.dll" />
+    <Content Include="Lib\Aspose.Words.dll" />
+    <Content Include="Lib\NLog.dll" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Home\Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Home\Views\Func\Index.cshtml" />
+    <Content Include="Areas\Home\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Home\Views\User\Index.cshtml" />
+    <Content Include="Areas\Home\Views\User\Add.cshtml" />
+    <Content Include="Areas\Home\Views\Department\Index.cshtml" />
+    <Content Include="Areas\Home\Views\User\SubDepartment.cshtml" />
+    <Content Include="Areas\Home\Views\User\Edit.cshtml" />
+    <Content Include="Areas\Home\Views\User\Details.cshtml" />
+    <Content Include="Areas\Home\Views\Role\Index.cshtml" />
+    <Content Include="Areas\Home\Views\Role\Add.cshtml" />
+    <Content Include="Areas\Home\Views\Role\Edit.cshtml" />
+    <Content Include="Areas\Home\Views\Role\Details.cshtml" />
+    <Content Include="Areas\Home\Views\User\BindRole.cshtml" />
+    <Content Include="Areas\Home\Views\Access\Index.cshtml" />
+    <Content Include="Areas\Home\Views\Main\Index.cshtml" />
+    <Content Include="Areas\Home\Views\Login\Index.cshtml" />
+    <Content Include="Areas\Home\Views\Main\NoAuth.cshtml" />
+    <Content Include="Areas\Home\Views\Client\Index.cshtml" />
+    <Content Include="Areas\Home\Views\Client\Add.cshtml" />
+    <Content Include="Areas\Home\Views\Client\Edit.cshtml" />
+    <Content Include="Areas\Home\Views\Client\ClientDetails.cshtml" />
+    <Content Include="Areas\Home\Views\Supplier\Add.cshtml" />
+    <Content Include="Areas\Home\Views\Supplier\Index.cshtml" />
+    <Content Include="Areas\Home\Views\Supplier\Edit.cshtml" />
+    <Content Include="Areas\Home\Views\Main\Timeout.cshtml" />
+    <Content Include="Areas\Home\Views\Commodity\Add.cshtml" />
+    <Content Include="Areas\Home\Views\Commodity\Edit.cshtml" />
+    <Content Include="Areas\Home\Views\Commodity\Details.cshtml" />
+    <Content Include="Areas\Home\Views\Supplier\Details.cshtml" />
+    <Content Include="Areas\Home\Views\Commodity\Index.cshtml" />
+    <Content Include="Areas\Home\Views\Main\EditPwd.cshtml" />
+    <Content Include="Areas\Home\Views\LoginLog\Index.cshtml" />
+    <Content Include="Areas\Home\Views\Log\Index.cshtml" />
+    <Content Include="Areas\Home\Views\DepAccess\Index.cshtml" />
+    <Content Include="Areas\Home\Views\ApprovalRule\Index.cshtml" />
+    <Content Include="Areas\Home\Views\ApprovalRule\Add.cshtml" />
+    <Content Include="Areas\Home\Views\ApprovalRule\DefineRule.cshtml" />
+    <Content Include="Areas\Home\Views\ApprovalRule\Edit.cshtml" />
+    <Content Include="Areas\Home\Views\Client\Approve.cshtml" />
+    <Content Include="Areas\Home\Views\Main\UnapprovedIndex.cshtml" />
+    <Content Include="Areas\Home\Views\ApprovalRule\ShowProgress.cshtml" />
+    <Content Include="Areas\Home\Views\Supplier\Approve.cshtml" />
+    <Content Include="Areas\Home\Views\Client\Details.cshtml" />
+    <None Include="Models\Generated\Database.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Database.cs</LastGenOutput>
+    </None>
+    <None Include="Models\Generated\PetaPoco.Core.ttinclude" />
+    <None Include="Models\Generated\PetaPoco.Generator.ttinclude" />
+    <Content Include="Views\Shared\DialogPartialView.cshtml" />
+    <Content Include="Views\Shared\FootPartialView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FTERPCommon\FTERPCommon.csproj">
+      <Project>{2A2D552E-1A45-4BE6-8188-E28EF8674AF8}</Project>
+      <Name>FTERPCommon</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>5846</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

@@ -1,0 +1,9 @@
+F:\Chean\Study\NET\Test\ForeignTradeERP\code\FTERP\FTERPCommon\bin\Debug\FTERPCommon.dll
+F:\Chean\Study\NET\Test\ForeignTradeERP\code\FTERP\FTERPCommon\bin\Debug\FTERPCommon.pdb
+F:\Chean\Study\NET\Test\ForeignTradeERP\code\FTERP\FTERPCommon\obj\Debug\FTERPCommon.dll
+F:\Chean\Study\NET\Test\ForeignTradeERP\code\FTERP\FTERPCommon\obj\Debug\FTERPCommon.pdb
+D:\Projects\ForeignTradeERP\code\FTERP\FTERPCommon\bin\Debug\FTERPCommon.dll
+D:\Projects\ForeignTradeERP\code\FTERP\FTERPCommon\bin\Debug\FTERPCommon.pdb
+D:\Projects\ForeignTradeERP\code\FTERP\FTERPCommon\obj\Debug\FTERPCommon.dll
+D:\Projects\ForeignTradeERP\code\FTERP\FTERPCommon\obj\Debug\FTERPCommon.pdb
+D:\Projects\ForeignTradeERP\code\FTERP\FTERPCommon\obj\Debug\FTERPCommon.csprojResolveAssemblyReference.cache

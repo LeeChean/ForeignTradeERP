@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "Tab";
+    Layout = "~/Areas/Home/Views/Shared/_Layout.cshtml";
+}
+@Html.RenderNavHtml()
+<div class="m-content">
+    <div class="m-form f-cb">
+        <!-- TAB Start -->
+        <div class="tabContent">
+            <div id="con">
+                <ul id="tags">
+                    <li id="li0" runat="server" class="selectTag"><a onclick="selectTag('tagContent0',this)"
+                        href="javascript:void(0)" parfuncheck>客户详情1</a></li>
+                    <li id="li1" runat="server"><a onclick="selectTag('tagContent1',this)" href="javascript:void(0)"
+                        parfuncheck>客户详情2</a></li>
+                </ul>
+                <div id="tagContent">
+                    <div runat="server" class="tagContentNew selectTag" id="tagContent0">
+                        <iframe src="/Home/Client/ClientDetails?id=@ViewBag.id" frameborder="0" height="800" width="100%"></iframe>
+                    </div>
+                    <div runat="server" class="tagContentNew" id="tagContent1">
+                        <iframe src="" frameborder="0" height="800" width="100%"></iframe>
+                    </div>
+                    <div class="tagContentNew" id="tagContent2">
+                        <iframe src="" frameborder="0" height="800" width="100%"></iframe>
+                    </div>
+                    <div runat="server" class="tagContentNew" id="tagContent3">
+                        <iframe src="" frameborder="0" height="800" width="100%"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- TAB End -->
+    </div>
+</div>
+
+<script type="text/javascript">
+    function selectTag(showContent, selfObj) {
+        // 操作标签
+        var tag = document.getElementById("tags").getElementsByTagName("li");
+        var taglength = tag.length;
+        for (i = 0; i < taglength; i++) {
+            tag[i].className = "";
+        }
+
+        selfObj.parentNode.className = "selectTag";
+        // 操作内容
+        for (i = 0; j = document.getElementById("tagContent" + i); i++) {
+            j.style.display = "none";
+        }
+
+        document.getElementById(showContent).style.display = "block";
+
+        try {
+            top.frameload();
+        }
+        catch (err) { }
+    }
+</script>

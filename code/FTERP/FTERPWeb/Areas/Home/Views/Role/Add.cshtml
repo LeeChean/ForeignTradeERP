@@ -1,0 +1,30 @@
+﻿@model FTERPWeb.Home.ViewModels.AddRoleModel
+@{
+    ViewBag.Title = "角色添加";
+    Layout = "~/Areas/Home/Views/Shared/_Layout.cshtml";
+}
+@section head{
+}
+@Html.RenderNavHtml()
+<div class="m-content">
+    @using (Html.BeginForm())
+    {
+        <div class="m-form f-cb">
+            <dl class="f-cb">
+                <dt><i>*</i>角色名称:</dt>
+                <dd>@Html.TextBoxFor(model => model.Name, new { @maxlength = "15", @class = "u-iptl trim" })
+                    @Html.ValidationMessageFor(model => model.Name)</dd>
+                <dt>备注:</dt>
+                <dd>
+                    @Html.TextBoxFor(model => model.Remark, new { @maxlength = "80", @class = "u-iptl trim" })
+                    @Html.ValidationMessageFor(model => model.Remark)
+                </dd>
+                <dt></dt>
+                <dd>
+                    <input type="button" value="保存" class="u-btnblue" onclick="Common.Save({ actionUrl: '/Home/Role/Add', backUrl: '/Home/Role/Index' });" />
+                    <input type="button" value="返回" class="u-btnblue marl10" onclick="location.href = '/Home/Role/Index';" />
+                </dd>
+            </dl>
+        </div>
+    }
+</div>

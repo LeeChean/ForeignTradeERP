@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data>
+	<pic amount="4">
+		<path>
+			<smpic>pic/smpic/00.jpg</smpic>
+			<bigpic></bigpic>
+		</path>
+		<path>
+			<smpic>pic/smpic/09.jpg</smpic>
+			<bigpic>pic/bigpic/09.png</bigpic>
+		</path>
+		<path>
+			<smpic>pic/smpic/13.jpg</smpic>
+			<bigpic>pic/bigpic/13.png</bigpic>
+		</path>
+		<path>
+			<smpic>pic/smpic/12.jpg</smpic>
+			<bigpic>pic/bigpic/12.png</bigpic>
+		</path>
+		<path>
+			<smpic>pic/smpic/11.jpg</smpic>
+			<bigpic>pic/bigpic/11.png</bigpic>
+		</path>
+		<path>
+			<smpic>pic/smpic/08.jpg</smpic>
+			<bigpic>pic/bigpic/08.png</bigpic>
+		</path>
+		<path>
+			<smpic>pic/smpic/05.jpg</smpic>
+			<bigpic>pic/bigpic/05.png</bigpic>
+		</path>
+		<path>
+			<smpic>pic/smpic/02.jpg</smpic>
+			<bigpic>pic/bigpic/02.png</bigpic>
+		</path>
+		<path>
+			<smpic>pic/smpic/03.jpg</smpic>
+			<bigpic>pic/bigpic/03.png</bigpic>
+		</path>
+		<path>
+			<smpic>pic/smpic/10.jpg</smpic>
+			<bigpic>pic/bigpic/10.png</bigpic>
+		</path>
+		<path>
+			<smpic>pic/smpic/04.jpg</smpic>
+			<bigpic>pic/bigpic/04.png</bigpic>
+		</path>	
+	</pic>
+</data>

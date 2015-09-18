@@ -1,0 +1,74 @@
+﻿@model FTERPWeb.Home.ViewModels.IndexModel
+@{
+    ViewBag.Title = "待审批列表";
+    Layout = "~/Areas/Home/Views/Shared/_Layout.cshtml";
+}
+<div class="box01">
+    <div class="box01Top">
+        <span class="box01TopTitle">待审批信息</span>
+    </div>
+    @if (Model.UnapprovedList.Count() == 0)
+    {
+        <div class="box01Content clearfix">
+            <dl style="text-align: center; color: #f07f1a;">
+                <dt></dt>
+                <dd>
+                    暂无数据</dd>
+            </dl>
+        </div>
+    }
+    else
+    {
+        <div class="box01Content clearfix newsListDate05">
+            @foreach (var doc in Model.UnapprovedList)
+            {
+                <dl>
+                    <dt>
+                    <img src="@Html.StaticFor("/css/home/Images/new.gif")" />
+                    <a href="@doc.Url" target="mainRigh" title="@doc.Title">@(doc.CreateMan)提交了@(doc.DocType)@(doc.Title)，待审批！</a></dt>
+                    <dd style="margin-left: 1px; margin-right: 8px;">
+                        @doc.CreateTime
+                    </dd>
+                </dl>
+            }
+        </div>
+    }
+</div>
+@*  @if (Model.DocTypeList.Count > 0)
+    {
+foreach (var item in Model.DocTypeList)
+        {
+       <div class="box01">
+            <div class="box01Top">
+                <span class="box01TopTitle" title="@item.Typename">@item.Typename</span>
+            </div>
+            @if (Model.UnapprovedList.Where(d => d.DocType == item.Id) == null
+                || Model.UnapprovedList.Where(d => d.DocType == item.Id).Count() == 0)
+            {
+                <div class="box01Content clearfix">
+                    <dl style="text-align: center; color: #f07f1a;">
+                        <dt></dt>
+                        <dd>
+                            暂无数据</dd>
+                    </dl>
+                </div>
+            }
+            else
+            {
+                <div class="box01Content clearfix newsListDate05">
+                    @foreach (var doc in Model.UnapprovedList.Where(d => d.DocType == item.Id))
+                    {
+                        <dl>
+                            <dt><a href="@doc.Url" target="mainRigh" title="@doc.Title">@doc.Title</a></dt>
+                            <dd style="margin-left: 1px; margin-right: 8px;">
+                                @doc.CreateTime
+                            </dd>
+                        </dl>
+                    }
+                </div>
+            }
+        </div>
+        <div class="clear01">
+        </div>        
+        }
+    }*@ 

@@ -1,0 +1,187 @@
+﻿@model FTERPWeb.Home.ViewModels.EditDepartmentModel
+@{
+    ViewBag.Title = "部门";
+    Layout = "~/Areas/Home/Views/Shared/_Layout.cshtml";
+}
+@section foot{
+    <script type="text/javascript">
+        var setting = {
+            data: {
+                key: {
+                    name: "Name"
+                },
+                simpleData: {
+                    enable: true,
+                    idKey: 'Id',
+                    pIdKey: 'Pid'
+                }
+            },
+            callback: {
+                onClick: onClick
+            }
+        };
+
+        function onClick(event, treeId, treeNode, clickFlag) {
+            $("#btnAddSub").show();
+            $("#btnAddSameLevel").show();
+            $("#btnSave").show();
+            $("#btnDelete").show();
+            $("#btnAdd").hide();
+
+            $('#Id').val(treeNode['Id']);
+            var parentNode = treeNode.getParentNode();
+            if (parentNode == null) {
+                $('#Pid').val('0');
+                $('#FullPid').val('0');
+            } else {
+                $('#Pid').val(parentNode['Id']);
+                var fullPid = parentNode['FullPid'] + '-' + parentNode['Id'];
+                $('#FullPid').val(fullPid);
+            }
+
+            $('#DepLevel').val(treeNode.level + 1);
+            $('#Name').val(treeNode['Name']);
+            $('#No').val(treeNode['No']);
+            $('#Sortno').val(treeNode['Sortno']);
+            $('#Managerid').val(treeNode['Managerid']);
+            $("input[name='DocDepartment']").each(function () {
+                if (this.value == treeNode['DocDepartment']) {
+                    $(this).attr("checked", "checked");
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            //初始化部门树
+            $.getJSON('/Home/Department/GetDepartmentTree', function (data) {
+
+                for (var i = 0; i < data.length; i++) {
+                    data[i].open = true;
+                }
+                $.fn.zTree.init($("#ztree"), setting, data);
+            });
+
+            $("#btnAddSub").hide();
+            $("#btnAddSameLevel").hide();
+            $("#btnSave").hide();
+            $("#btnDelete").hide();
+        });
+
+        //添加部门
+        function AddDepartment() {
+            Common.Save({ actionUrl: "/Home/Department/Add", backUrl: "/Home/Department/Index" });
+        }
+
+        //添加子部门
+        function AddSubDepartment() {
+            if ($('#DepLevel').val() == '7') {
+                Common.Tip('部门最大层级为7', null);
+                return false;
+            }
+
+            if ($('#Pid').val() == '') {
+                Common.Tip('请先在左侧选择一个部门！', null);
+                return false;
+            }
+
+            Common.Save({ actionUrl: "/Home/Department/AddSub", backUrl: "/Home/Department/Index" });
+        }
+
+        //编辑部门
+        function EditDepartment() {
+            Common.Save({ actionUrl: "/Home/Department/Edit", backUrl: "/Home/Department/Index" });
+        }
+
+        //删除部门
+        function DeleteDepartment() {
+            if ($('#Id').val() == '') {
+                Common.Tip('请选择要删除的部门!', null);
+                return false;
+            }
+
+            var flag = false;
+            $.ajax({
+                url: "/Home/Department/HasPeople?depId=" + $("#Id").val(),
+                type: "get",
+                dataType: "text",
+                async: false,
+                success: function (msg) {
+                    if (msg == "1") {
+                        Common.Tip("此部门下有人员，不能删除！", function () { });
+                    }
+                    else flag = true;
+                }
+            });
+            if (!flag) return false;
+
+            art.dialog.confirm("您确定要删除该部门以及下级部门吗？删除后不可恢复！", function () {
+                $.post("/Home/Department/Delete", { depId: $('#Id').val() }, function (msg) {
+                    if (msg == "1") {
+                        Common.Success("删除成功", function () { window.location = "/Home/Department/Index"; });
+                    }
+                    else {
+                        Common.Error("删除失败", function () { });
+                    }
+
+                }, "");
+            }, null);
+        }
+    </script>
+}
+@Html.RenderNavHtml()
+<div class="m-content">
+    <div class="m-content">
+        <div class="m-tree">
+            <ul class="ztree" id="ztree">
+            </ul>
+        </div>
+        <div class="m-treeR">
+            <div class="m-form f-cb">
+                @using (Html.BeginForm())
+                {
+                    <!-- mainTable02 start -->
+                    <dl class="f-cb">
+                        <dt><i>*</i>部门名称：</dt>
+                        <dd>@Html.TextBoxFor(m => m.Name, new { @class = "u-iptl" })
+                            @Html.ValidationMessageFor(m => m.Name)</dd>
+                        <dt>部门编号：</dt>
+                        <dd>@Html.TextBoxFor(m => m.No, new { @class = "u-iptl" })
+                            @Html.ValidationMessageFor(m => m.No)</dd>
+                        <dt>业务部门：</dt>
+                        <dd>
+                            <label>
+                                <input type="radio" name="DocDepartment" value="1" checked />是</label>
+                            <label>
+                                <input type="radio" name="DocDepartment" value="0" />否</label>
+                        </dd>
+                        <dt>排序编号：</dt>
+                        <dd>@Html.TextBoxFor(m => m.Sortno, new { @class = "u-iptl" })
+                            @Html.ValidationMessageFor(m => m.Sortno)</dd>
+                        @*<dt>部门经理：</dt>
+                        <dd>@Html.TextBoxFor(m => m.Managerid, new { @class = "u-iptl" })
+                            @Html.ValidationMessageFor(m => m.Managerid)</dd>*@
+                        <dt></dt>
+                        <dd>
+                            <input name="input" type="button" id="btnAddSub" value="添加子部门" class="u-btn" onclick="AddSubDepartment()" />
+                        </dd>
+                        <dt></dt>
+                        <dd>
+                            <input name="input" type="button" id="btnAddSameLevel" value="添加同级部门" class="u-btn"
+                                onclick="AddDepartment()" /></dd>
+                        <dt></dt>
+                        <dd>
+                            <input name="input" type="button" id="btnAdd" value="添加部门" class="u-btnblue" onclick="AddDepartment()" />
+                            <input name="input" type="button" id="btnSave" value="保存" class="u-btnblue" onclick="EditDepartment()" />
+                            <input name="input" type="button" id="btnDelete" value="删除" class="u-btnblue marl10"
+                                onclick="DeleteDepartment()" /></dd>
+                    </dl>
+                    @Html.HiddenFor(m => m.Id)
+                    @Html.HiddenFor(m => m.Pid)
+                    @Html.HiddenFor(m => m.DepLevel)
+                    @Html.HiddenFor(m => m.FullPid)
+                    <!-- mainTable02 end -->   
+                }
+            </div>
+        </div>
+    </div>
+</div>

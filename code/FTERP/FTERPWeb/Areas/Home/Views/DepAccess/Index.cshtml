@@ -1,0 +1,146 @@
+﻿@{
+    ViewBag.Title = "部门权限";
+    Layout = "~/Areas/Home/Views/Shared/_Layout.cshtml";
+}
+@section foot{
+    <script type="text/javascript">
+        var depSetting = {
+            data: {
+                key: {
+                    name: "Name"
+                },
+                simpleData: {
+                    enable: true,
+                    idKey: 'Id',
+                    pIdKey: 'Pid'
+                }
+            },
+            callback: {
+                onClick: onClick
+            }
+        };
+
+        var accessSetting = {
+            check: {
+                enable: true
+            },
+            data: {
+                key: {
+                    checked: "Checked",
+                    name: "Name"
+                },
+                simpleData: {
+                    enable: true,
+                    idKey: 'Id',
+                    pIdKey: 'Pid'
+                }
+            },
+            callback: {
+                onCheck: zTreeOnCheck
+            }
+        };
+
+        function onClick(event, treeId, treeNode, clickFlag) {
+            $('#belongDepId').val(treeNode['Id']);
+
+            $("#roleId").val("请选择");
+            $("#depztree").html("");
+        }
+
+        function zTreeOnCheck(event, treeId, treeNode) {
+            var nodes = treeObj.getCheckedNodes(true);
+            var _nodes = new Array();
+            for (var i = 0; i < nodes.length; i++) {
+                if (!nodes[i].getCheckStatus().half) {
+                    _nodes.push(nodes[i].Id);
+                }
+            }
+            $('#depIds').val(_nodes.join(','));
+        };
+
+        $(document).ready(function () {
+            //初始化部门树
+            $.getJSON('/Home/Department/GetDepartmentTree', function (data) {
+
+                for (var i = 0; i < data.length; i++) {
+                    data[i].open = true;
+                }
+                $.fn.zTree.init($("#belongDepztree"), depSetting, data);
+            });
+
+            $('#roleId').change(function () {
+                BindTree();
+            });
+            BindTree();
+        });
+
+        function BindTree() {
+
+            $.getJSON('/Home/DepAccess/GetDepTree/?belongDepId=' + $('#belongDepId').val() +
+                '&roleId=' + $('#roleId').val(), function (data) {
+                    if (data != null) {
+                        for (var i = 0; i < data.length; i++) {
+                            data[i].open = true;
+                        }
+                        treeObj = $.fn.zTree.init($("#depztree"), accessSetting, data);
+                    }
+                    else {
+                        $("#depztree").html("");
+                    }
+                });
+        }
+
+        function Save() {
+            if ($("#belongDepId").val() == "") {
+                Common.Tip("请选择部门！", function () { });
+                return;
+            }
+            if ($("#roleId").val() == "") {
+                Common.Tip("请选择角色！", function () { });
+                return;
+            }
+
+            //var nodes = treeObj.getCheckedNodes(true);
+            //var _nodes = new Array();
+            //for (var i = 0; i < nodes.length; i++) {
+            //    _nodes.push(nodes[i].Id);
+            //}
+            //$('#depIds').val(_nodes.join(','));
+
+            Common.Save({ actionUrl: "/Home/DepAccess/Add" });
+        }
+    </script>
+}
+@Html.RenderNavHtml()
+<div class="m-content">
+    <div class="m-content">
+        <div class="m-tree">
+            <ul class="ztree" id="belongDepztree">
+            </ul>
+        </div>
+        <div class="m-treeR">
+            <div class="m-form f-cb">
+                @using (Html.BeginForm())
+                {
+                    <dl class="f-cb">
+                        <dt>选择角色：</dt>
+                        <dd>
+                            @Html.DropDownList("roleId", ViewBag.roleList as List<SelectListItem>, "请选择", new { @class = "u-iptl" })
+                        </dd>
+                        <dt>选择权限：</dt>
+                        <dd>
+                            <ul class="ztree" id="depztree">
+                            </ul>
+                        </dd>
+                        <dt></dt>
+                        <dd>
+                            <input type="hidden" id="belongDepId" name="belongDepId" />
+                            <input type="hidden" id="depIds" name="depIds" />
+                            <input type="button" value="保存" class="u-btnblue" onclick="Save()" />
+                        </dd>
+                    </dl>   
+                }
+            </div>
+        </div>
+    </div>
+</div>

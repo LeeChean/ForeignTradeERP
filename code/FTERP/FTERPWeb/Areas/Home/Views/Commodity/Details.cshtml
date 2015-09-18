@@ -1,0 +1,82 @@
+﻿@model FTERPWeb.Models.CommodityModel
+@{
+    ViewBag.Title = "商品详情";
+    Layout = "~/Areas/Home/Views/Shared/_Layout.cshtml";
+}
+@Html.RenderNavHtml()
+<div class="m-content">
+    <div class="m-form f-cb">
+        @using (Html.BeginForm())
+        {
+            <dl class="f-fl marl200 f-width400">
+                <dt>商品编号：</dt>
+                <dd>
+                    @Model.No
+                </dd>
+                <dt>商品类别：</dt>
+                <dd>
+                    @Model.Type
+                </dd>
+                <dt>中文名称：</dt>
+                <dd>
+                    @Model.ChName
+                </dd>
+                <dt>英文名称：</dt>
+                <dd>
+                    @Model.EnName
+                </dd>
+                <dt>商品货号：</dt>
+                <dd>
+                    @Model.ProductCode
+                </dd>
+                <dt>商品单位：</dt>
+                <dd>
+                    @Model.Unit
+                </dd>
+                <dt>关税率：</dt>
+                <dd>
+                    @Model.TariffRate
+                </dd>
+                <dt>增值税率：</dt>
+                <dd>
+                    @Model.VatRate
+                </dd>
+            </dl>
+            <dl class="f-fl f-width400">
+                <dt>退税率：</dt>
+                <dd>
+                    @Model.RefundRate
+                </dd>
+                <dt>海关编码：</dt>
+                <dd>
+                    @Model.CustomsNo
+                </dd>
+                <dt>备注：</dt>
+                <dd>
+                    @Model.Remark
+                </dd>
+                <dt>业务员：</dt>
+                <dd>
+                    @ViewBag.BelongsMan
+                </dd>
+                <dt>业务部门：</dt>
+                <dd>
+                    @ViewBag.BelongsDepartment
+                </dd>
+                <dt>制单人：</dt>
+                <dd>
+                    @ViewBag.CreateMan
+                </dd>
+                <dt>制单时间：</dt>
+                <dd>
+                    @ViewBag.CreateTime
+                </dd>
+            </dl>
+            <dl class="marl200">
+                <dt></dt>
+                <dd>
+                    <input type="button" value="返回" class="u-btnblue marl10" onclick="location.href = '@ViewBag.backUrl';" /></dd>
+            </dl>
+        }
+    </div>
+</div>

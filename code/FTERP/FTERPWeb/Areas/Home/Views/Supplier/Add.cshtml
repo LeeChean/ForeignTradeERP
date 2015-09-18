@@ -1,0 +1,81 @@
+﻿@model FTERPWeb.Home.ViewModels.SupplierViewModel
+@using FTERPWeb.Common
+@{
+    ViewBag.Title = "供应商添加";
+    Layout = "~/Areas/Home/Views/Shared/_Layout.cshtml";
+}
+@Html.RenderNavHtml()
+<div class="m-content">
+    <div class="m-form f-cb">
+        @using (Html.BeginForm())
+        {
+            <dl class="f-cb">
+                <dt>供应商编号：</dt>
+                <dd>@CommonMethod.GetLatestSerialNo(SysConfig.SerialNo.SupplierNo)
+                </dd>
+                <dt>供应商类别：</dt>
+                <dd>@Html.TextBoxFor(model => model.Type, new { @class = "u-iptl trim", @maxlength = "20" })
+                    @Html.ValidationMessageFor(model => model.Type)
+                </dd>
+                <dt>中文名称：</dt>
+                <dd>@Html.TextBoxFor(model => model.ChName, new { @class = "u-iptl trim", @maxlength = "30" })
+                    @Html.ValidationMessageFor(model => model.ChName)
+                </dd>
+                <dt>英文名称：</dt>
+                <dd>@Html.TextBoxFor(model => model.EnName, new { @class = "u-iptl trim", @maxlength = "30" })
+                    @Html.ValidationMessageFor(model => model.EnName)
+                </dd>
+                <dt>简称：</dt>
+                <dd>
+                    @Html.TextBoxFor(model => model.ShortName, new { @class = "u-iptl trim", @maxlength = "20" })
+                    @Html.ValidationMessageFor(model => model.ShortName)
+                </dd>
+                <dt>国家：</dt>
+                <dd>
+                    @Html.DropDownList("Countryid", ViewBag.Country as List<SelectListItem>, "请选择", new { @class = "u-iptl" })
+                </dd>
+                <dt>地址：</dt>
+                <dd>
+                    @Html.TextBoxFor(model => model.Address, new { @class = "u-iptl trim", @maxlength = "500" })
+                    @Html.ValidationMessageFor(model => model.Address)
+                </dd>
+                <dt>电话：</dt>
+                <dd>
+                    @Html.TextBoxFor(model => model.Phone, new { @class = "u-iptl trim", @maxlength = "20" })
+                    @Html.ValidationMessageFor(model => model.Phone)
+                </dd>
+                <dt>邮箱：</dt>
+                <dd>
+                    @Html.TextBoxFor(model => model.Email, new { @class = "u-iptl trim", @maxlength = "50" })
+                    @Html.ValidationMessageFor(model => model.Email)
+                </dd>
+                <dt>联系人：</dt>
+                <dd>
+                    @Html.TextBoxFor(model => model.Linkman, new { @class = "u-iptl trim", @maxlength = "20" })
+                    @Html.ValidationMessageFor(model => model.Linkman)
+                </dd>
+                <dt>开户行：</dt>
+                <dd>
+                    @Html.TextBoxFor(model => model.OpeningBank, new { @class = "u-iptl trim", @maxlength = "20" })
+                    @Html.ValidationMessageFor(model => model.OpeningBank)
+                </dd>
+                <dt>开户行账号：</dt>
+                <dd>
+                    @Html.TextBoxFor(model => model.BankAccount, new { @class = "u-iptl trim", @maxlength = "20" })
+                    @Html.ValidationMessageFor(model => model.BankAccount)
+                </dd>
+                <dt>备注：</dt>
+                <dd>
+                    @Html.TextBoxFor(model => model.Remark, new { @class = "u-iptl trim", @maxlength = "1000" })
+                    @Html.ValidationMessageFor(model => model.Remark)
+                </dd>
+            </dl>
+            <dl class="f-cb">
+                <dt></dt>
+                <dd>
+                    <input type="button" value="保存" class="u-btnblue" onclick="Common.Save({ actionUrl: '/Home/Supplier/Add', backUrl: '/Home/Supplier/Index' });" />
+                    <input type="button" value="返回" class="u-btnblue marl10" onclick="location.href = '/Home/Supplier/index';" /></dd>
+            </dl>
+        }
+    </div>
+</div>

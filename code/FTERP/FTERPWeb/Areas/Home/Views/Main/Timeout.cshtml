@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "超时";
+    Layout = null;
+}
+@Html.StaticFor("/css/home/backstage.css")
+@Html.StaticFor("/css/home/common.css")
+<div class="m-opersf f-cb">
+    <dl>
+        <dt class="ico-fail"></dt>
+        <dd>
+            <h2 class="z-err">
+                对不起,您的登陆已超时，请<a onclick="Relogin()">重新登录</a></h1>
+        </dd>
+    </dl>
+</div>
+<script type="text/javascript">
+    function Relogin() {
+        top.window.location.href = "/Home/Login/Index";
+    }
+</script>

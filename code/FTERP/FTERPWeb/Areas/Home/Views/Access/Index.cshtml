@@ -1,0 +1,102 @@
+﻿@{
+    ViewBag.Title = "权限";
+    Layout = "~/Areas/Home/Views/Shared/_Layout.cshtml";
+}
+@section foot{
+    <script type="text/javascript">
+        var setting = {
+            check: {
+                enable: true
+            },
+            data: {
+                key: {
+                    checked: "Checked",
+                    name: "Title"
+                },
+                simpleData: {
+                    enable: true,
+                    idKey: 'Id',
+                    pIdKey: 'Pid'
+                }
+            },
+            callback: {
+                onCheck: zTreeOnCheck
+            }
+        };
+
+        var treeObj = null;
+
+        function zTreeOnCheck(event, treeId, treeNode) {
+            var nodes = treeObj.getCheckedNodes(true);
+            var _nodes = new Array();
+            for (var i = 0; i < nodes.length; i++) {
+                _nodes.push(nodes[i].Id);
+            }
+            $('#funcIds').val(_nodes.join(','));
+        };
+
+
+        function BindTree() {
+
+            $.getJSON('/Home/Access/GetFuncTree/?roleId=' + $('#roleId').val(), function (data) {
+                if (data != null) {
+                    for (var i = 0; i < data.length; i++) {
+                        data[i].open = true;
+                    }
+                    treeObj = $.fn.zTree.init($("#ztree"), setting, data);
+                }
+                else {
+                    $("#ztree").html("");
+                }
+            });
+        }
+
+        function Save() {
+            if ($("#roleId").val() == "") {
+                Common.Tip("请选择角色！", function () { });
+                return;
+            }
+
+            var nodes = treeObj.getCheckedNodes(true);
+            var _nodes = new Array();
+            for (var i = 0; i < nodes.length; i++) {
+                _nodes.push(nodes[i].Id);
+            }
+            $('#funcIds').val(_nodes.join(','));
+
+            Common.Save({ actionUrl: "/Home/Access/Add" });
+        }
+
+        $(document).ready(function () {
+            $('#roleId').change(function () {
+                BindTree();
+            });
+
+            BindTree();
+        });
+    </script>
+}
+@using (Html.BeginForm("Add", "Access", FormMethod.Post))
+{
+    @Html.RenderNavHtml()
+    <div class="m-content">
+        <div class="m-form f-cb">
+            <dl class="f-cb">
+                <dt>选择角色：</dt>
+                <dd>
+                    @Html.DropDownList("roleId", ViewBag.roleList as List<SelectListItem>, new { @class = "u-iptl" })
+                </dd>
+                <dt>选择节点：</dt>
+                <dd>
+                    <ul class="ztree" id="ztree">
+                    </ul>
+                </dd>
+                <dt></dt>
+                <dd>
+                    <input type="button" value="保存" class="u-btnblue" onclick="Save()" />
+                </dd>
+            </dl>
+        </div>
+    </div>
+    @Html.Hidden("funcIds")
+}

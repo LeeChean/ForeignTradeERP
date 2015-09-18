@@ -1,0 +1,135 @@
+
+@charset "utf-8";
+#upload-start {
+    clear: both;
+    cursor: pointer;
+    height: 30px !important;
+    width: 150px !important;
+}
+#uploadControl ul, ol {
+    list-style: none outside none;
+}
+#uploadControl ul, ol, li, img {
+    border: 0 none;
+    margin: 0;
+    padding: 0;
+}
+#uploadControl .stream-files-scroll {
+    height: 120px;
+    overflow: hidden;
+}
+#uploadControl .stream-cell-file {
+    border-bottom: medium none;
+    cursor: default;
+    padding: 10px 20px 10px 35px;
+    position: relative;
+}
+#uploadControl .stream-cell-file .stream-cell-infos:before, .stream-cell-file .stream-cell-infos:after {
+    clear: both;
+    content: ".";
+    display: block;
+    font-size: 0;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+}
+#uploadControl .stream-cell-file .stream-file-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+#uploadControl .stream-cell-file .stream-process {
+    overflow: hidden;
+}
+#uploadControl .stream-cell-file .stream-cancel {
+    float: right;
+    margin-right: 5px;
+}
+#uploadControl a {
+    color: #158144;
+}
+#uploadControl .stream-cell-file .stream-process-bar, #uploadControl .stream-cell-file .stream-percent {
+    float: left;
+    margin-right: 10px;
+}
+#uploadControl .stream-cell-file .stream-process-bar {
+    height: 20px;
+    margin-top: 3px;
+    width: 320px;
+}
+#uploadControl .stream-process-bar {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+    height: 10px;
+    overflow: hidden;
+    position: relative;
+    width: 55px;
+}
+#uploadControl .stream-process-bar span {
+    background-color: #A5DD3D;
+    background-image: url("./img/bgx.png");
+    background-position: 0 -260px;
+    background-repeat: repeat-x;
+    border: 1px solid #FFFFFF;
+    font-size: 0;
+    height: 18px;
+    left: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+}
+#uploadControl .stream-process-bar, .stream-process-bar span {
+    -moz-box-sizing: border-box;
+}
+#uploadControl .stream-cell-file .stream-cell-infos {
+    color: #7D7D7D;
+}
+#uploadControl .stream-cell-file .stream-cell-infos .stream-cell-info {
+    padding-right: 10px;
+    white-space: nowrap;
+}
+#uploadControl .stream-cell-file .stream-cell-infos span {
+    float: left;
+    margin-right: 8px;
+}
+#uploadControl .stream-total-tips .stream-process-bar {
+    margin-top: -1px;
+    width: 150px;
+}
+#uploadControl .stream-process-bar, .stream-uploading-ico {
+    -moz-box-align: center;
+    display: inline-block;
+    vertical-align: middle;
+}
+#uploadControl .stream-total-tips {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #F5F8F8;
+    border-color: #CCCCCC;
+    border-image: none;
+    border-style: solid;
+    border-width: 1px 0 0;
+    color: #565656;
+    padding: 5px 5px 5px 25px;
+    position: relative;
+}
+#uploadControl .stream-main-upload-box {
+    background-color: #FFFFFF;
+    border-color: #CCCCCC;
+    border-style: solid;
+    border-width: 1px;
+    clear: both;
+    margin-top: 10px;
+    overflow: hidden;
+    width: 480px;
+}
+#uploadControl .stream-uploading-ico {
+    background: url("./img/upload.gif") no-repeat scroll 0 1px transparent !important;
+    height: 18px;
+    left: 11px;
+    position: absolute;
+    top: 11px;
+    width: 18px;
+}

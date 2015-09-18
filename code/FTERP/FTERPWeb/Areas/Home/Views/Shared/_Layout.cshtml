@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    @Html.StaticFor("/js/jquery/jquery-1.7.2.min.js")
+    @Html.StaticFor("/css/home/backstage.css")
+    @Html.StaticFor("/css/home/common.css")
+    @Html.StaticFor("/css/home/Validate.css")
+    @Html.StaticFor("/js/ZTree/css/zTreeStyle/zTreeStyle.css")
+    @Html.StaticFor("/js/Common/Common.js")
+    @Html.StaticFor("/js/Common/CheckBoxUtil.js")
+    @Html.StaticFor("/js/Common/TextBoxUtil.js")
+    @Html.StaticFor("/js/jquery/jquery.form.js")
+    @Html.StaticFor("/js/jquery/jquery.validate.min.js")
+    @Html.StaticFor("/js/jquery/jquery.validate.unobtrusive.min.js")
+    @Html.Partial("DialogPartialView")
+    @Html.StaticFor("/js/ZTree/js/jquery.ztree.all-3.5.min.js")
+    @Html.StaticFor("/js/My97DatePicker/WdatePicker.js")
+    @Html.StaticFor("/js/printer/LodopFuncs.js")
+    @RenderSection("head", false)
+</head>
+<body>
+    @RenderBody()
+    @RenderSection("foot", false)
+</body>
+</html>

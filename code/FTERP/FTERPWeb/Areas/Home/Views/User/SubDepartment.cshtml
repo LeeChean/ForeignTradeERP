@@ -1,0 +1,6 @@
+﻿@{
+    string id = ViewBag.Id;
+    List<SelectListItem> list = ViewData["department"] as List<SelectListItem>;
+}
+@if (list != null && list.Count > 0)
+{@Html.DropDownList(id, list, new { @class = "u-iptm", @onchange = "GetSubDepartment(this)" })<span>&nbsp;</span>}

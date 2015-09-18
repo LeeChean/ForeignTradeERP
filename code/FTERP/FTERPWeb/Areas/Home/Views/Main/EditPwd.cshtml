@@ -1,0 +1,36 @@
+﻿@model FTERPWeb.Home.ViewModels.EditPwdViewModel
+@{
+    ViewBag.Title = "修改密码";
+    Layout = "~/Areas/Home/Views/Shared/_Layout.cshtml";
+}
+@section head{
+}
+<div class="m-tt">
+    修改密码</div>
+<div class="m-content">
+    @using (Html.BeginForm())
+    {
+        <div class="m-form f-cb">
+            <dl class="f-cb">
+                <dt><i>*</i>旧密码:</dt>
+                <dd>
+                    @Html.PasswordFor(m => m.OldPwd, new { @maxlength = "20", @class = "u-iptl" })
+                    @Html.ValidationMessageFor(m => m.OldPwd)</dd>
+                <dt><i>*</i>新密码:</dt>
+                <dd>
+                    @Html.PasswordFor(m => m.NewPwd, new { @maxlength = "20", @class = "u-iptl" })
+                    @Html.ValidationMessageFor(m => m.NewPwd)
+                </dd>
+                <dt><i>*</i>确认密码:</dt>
+                <dd>
+                    @Html.PasswordFor(m => m.RepeatPwd, new { @maxlength = "20", @class = "u-iptl" })
+                    @Html.ValidationMessageFor(m => m.RepeatPwd)
+                </dd>
+                <dt></dt>
+                <dd>
+                    <input type="button" value="保存" class="u-btnblue" onclick="Common.Save({ actionUrl: '/Home/Main/EditPwd' });" />
+                </dd>
+            </dl>
+        </div>
+    }
+</div>

@@ -1,0 +1,230 @@
+﻿@using PetaPoco
+@using FTERPCommon
+@using FTERPWeb.Common
+@model Page<FTERPWeb.Home.ViewModels.SupplierIndexModel>
+@{
+    ViewBag.Title = "供应商列表";
+    Layout = "~/Areas/Home/Views/Shared/_Layout.cshtml";
+}
+@Html.RenderNavHtml()
+<div class="m-content">
+    @using (Html.BeginForm())
+    {
+        <!-- 操作 start -->
+        <div class="m-content">
+            <input type="hidden" id="exportFlag" name="exportFlag" value="0" />
+            <input type="hidden" id="backType" name="backType" value="@ViewBag.backType"/>
+            <input name="input" type="button" value="添加" class="u-btnblue" onclick="window.location.href = '/Home/Supplier/Add'" />
+            <input name="input" type="button" value="编辑" class="u-btnblue" onclick="Edit({tableName:'Sys_Supplier',actionUrl:'/Home/Supplier/Edit?CurrentPage=@ViewBag.CurrentPage'})" />
+            <input name="input" type="button" value="删除" class="u-btnblue" onclick="Delete({tableName:'Sys_Supplier',actionUrl:'/Home/Supplier/Delete',backUrl:'/Home/Supplier/Index?CurrentPage=@ViewBag.CurrentPage'})" />
+            <input name="input" type="button" value="提交" class="u-btnblue" onclick="Operate({operateName:'提交',actionUrl:'/Home/Supplier/Submit',backUrl:'/Home/Supplier/Index'})" />
+            <input name="input" type="button" value="审批进度" class="u-btnblue" onclick="ShowProgress()" />
+            <input type="submit" value="导出Excel" class="u-btnblue" onclick="$('#exportFlag').val('1')" />
+        </div>
+        <!-- 操作 end --> 
+        <!-- search start -->       
+        <div class="m-schlist f-cb">
+            <div class="searchU">
+                <div class="searchUP">
+                    供应商编号：
+                </div>
+                <div class="searchUP">
+                    <input type="text" id="no" name="no" class="u-iptm trim" maxlength="30" />
+                </div>
+            </div>
+            <div class="searchU">
+                <div class="searchUP">
+                    中文名称：
+                </div>
+                <div class="searchUP">
+                    <input type="text" id="chName" name="chName" class="u-iptm trim" maxlength="20" />
+                </div>
+            </div>
+            <div class="searchU">
+                <div class="searchUP">
+                    国家：
+                </div>
+                <div class="searchUP">
+                    @Html.DropDownList("country", ViewBag.Country as List<SelectListItem>, "全部", new { @class = "u-iptm" })
+                </div>
+            </div>
+            <div class="searchU">
+                <div class="searchUP">
+                    英文名称：
+                </div>
+                <div class="searchUP">
+                    <input type="text" id="enName" name="enName" class="u-iptm trim" maxlength="20" />
+                </div>
+            </div>
+            <div class="searchU">
+                <div class="searchUP">
+                    审批状态：
+                </div>
+                <div class="searchUP">
+                    @Html.DropDownList("approvalStatus", CommonMethod.ApprovalStatus, new { @class = "u-iptm" })
+                </div>
+            </div>
+            @*<div class="searchU">
+                <div class="searchUP">
+                    是否有效：
+                </div>
+                <div class="searchUP">
+                    <select id="delFlag" name="delFlag" class="u-iptm">
+                        <option value="">全部</option>
+                        <option value="0">是</option>
+                        <option value="1">否</option>
+                    </select>
+                </div>
+            </div>*@
+        </div>      
+        <!-- search end -->
+        <!-- 查询 start -->
+        <div class="m-schlist">
+            <div class="searchU">
+                <div class="searchUP">
+                    每页显示条数：
+                </div>
+                <div class="searchUP">
+                    <input type="text" name="itemsPerPage" class="u-ipts number" maxlength="2" />
+                    <input type="submit" value="查询" class="u-btnblue" onclick="$('#exportFlag').val('0')" />
+                </div>
+            </div>
+        </div>
+        <!-- 查询 end -->
+    }
+    <table border="0" class="m-table f-cb mart20">
+        <tr>
+            <th class="f-width30">
+                <input type="checkbox" class="checkall" />
+            </th>
+            <th class="f-width80">
+                供应商类别
+            </th>
+            <th class="f-width80">
+                供应商编号
+            </th>
+            <th class="f-width80">
+                简称
+            </th>
+            <th class="f-width100">
+                中文名称
+            </th>
+            <th class="f-width100">
+                英文名称
+            </th>
+            <th class="f-width100">
+                国家
+            </th>
+            <th class="f-width100">
+                地址
+            </th>
+            <th class="f-width120">
+                电话
+            </th>
+            <th class="f-width100">
+                邮箱
+            </th>
+            @*<th class="f-width50">
+                是否有效
+            </th>*@
+            <th class="f-width80">
+                审批状态
+            </th>
+        </tr>
+        @if (Model.Items.Count == 0)
+        {
+            <tr>
+                <td colspan="11">
+                    暂无数据
+                </td>
+            </tr> 
+        }
+        @{ int index = FTERPWeb.Common.SysConfig.ItemsPerPage * ((int)Model.CurrentPage - 1); }
+        @foreach (var item in Model.Items)
+        {
+            index++;
+            <tr>
+                <td>
+                    @if (item.ApprovalStatus == "已生效")
+                    {
+                        <input type="checkbox" class="checkone" disabled="disabled" />    
+                    }
+                    else
+                    {
+                        <input type="checkbox" class="checkone" value="@item.Id" />
+                    }
+                </td>
+                <td title="@item.Type">
+                    @item.Type.SubStr(3, "...")
+                </td>
+                <td>
+                    <a href="/Home/Supplier/Details?id=@item.Id&CurrentPage=@ViewBag.CurrentPage">@item.No</a>
+                </td>
+                <td title="@item.ShortName">
+                    @item.ShortName.SubStr(3, "...")
+                </td>
+                <td title="@item.ChName">
+                    @item.ChName.SubStr(3, "...")
+                </td>
+                <td title="@item.EnName">
+                    @item.EnName.SubStr(3, "...")
+                </td>
+                <td title="@item.Country">
+                    @item.Country.SubStr(3, "...")
+                </td>
+                <td title="@item.Address">
+                    @item.Address.SubStr(3, "...")
+                </td>
+                <td title="@item.Phone">
+                    @item.Phone.SubStr(6, "...")
+                </td>
+                <td title="@item.Email">
+                    @item.Email.SubStr(3, "...")
+                </td>
+                @*<td>
+                    @item.DelFlag
+                </td>*@
+                <td>
+                    @item.ApprovalStatus
+                </td>
+            </tr> 
+        }
+    </table>
+    @Html.RenderHomePage(Model)
+</div>
+<script type="text/javascript">
+    $(function () {
+        var backType = $("#backType").val();
+        var no = Common.GetCookie("no");
+        var chName = Common.GetCookie("chName");
+        var country = Common.GetCookie("country");
+
+        var enName = Common.GetCookie("enName");
+        //var delFlag = Common.GetCookie("delFlag");
+        var approvalStatus = Common.GetCookie("approvalStatus");
+
+        if ("1" == backType) {
+            $("#no").val(null == no ? "" : no);
+            $("#chName").val(null == chName ? "" : chName);
+            $("#country").val(null == country ? "" : country);
+
+            $("#enName").val(null == enName ? "" : enName);
+            //$("#delFlag").val(null == delFlag ? "" : delFlag);
+            $("#approvalStatus").val(null == approvalStatus ? "" : approvalStatus);
+        }
+
+        BindCheckAll();
+    });
+
+    $("form").submit(function () {
+        //将查询条件放入Cookie中
+        Common.SetCookie("no", $("#no").val());
+        Common.SetCookie("chName", $("#chName").val());
+        Common.SetCookie("country", $("#country").val());
+
+        Common.SetCookie("enName", $("#enName").val());
+        Common.SetCookie("approvalStatus", $("#approvalStatus").val());
+        //Common.SetCookie("delFlag", $("#delFlag").val());
+        $("#backType").val("1");
+    }); 
+</script>

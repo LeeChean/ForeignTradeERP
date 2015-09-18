@@ -1,0 +1,5 @@
+F:\Chean\Study\NET\Test\ForeignTradeERP\code\FTERP\Test\bin\Debug\Test.exe
+F:\Chean\Study\NET\Test\ForeignTradeERP\code\FTERP\Test\bin\Debug\Test.pdb
+F:\Chean\Study\NET\Test\ForeignTradeERP\code\FTERP\Test\obj\x86\Debug\Test.exe
+F:\Chean\Study\NET\Test\ForeignTradeERP\code\FTERP\Test\obj\x86\Debug\Test.pdb
+F:\Chean\Study\NET\Test\ForeignTradeERP\code\FTERP\Test\obj\x86\Debug\Test.csprojResolveAssemblyReference.cache

@@ -1,0 +1,10 @@
+﻿@Html.StaticFor("/js/artDialog/skins/default.css")
+@if (ViewBag.Ori==true)
+{
+@Html.StaticFor("/js/artDialog/jquery.artDialog.source_Original.js")
+}
+else
+{ 
+@Html.StaticFor("/js/artDialog/jquery.artDialog.source.js")
+}
+@Html.StaticFor("/js/artDialog/plugins/iframeTools.source.js")

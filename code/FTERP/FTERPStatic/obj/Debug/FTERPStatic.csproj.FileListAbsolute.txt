@@ -1,0 +1,10 @@
+F:\Chean\Study\NET\Test\ForeignTradeERP\code\FTERP\FTERPStatic\bin\FTERPStatic.dll
+F:\Chean\Study\NET\Test\ForeignTradeERP\code\FTERP\FTERPStatic\bin\FTERPStatic.pdb
+F:\Chean\Study\NET\Test\ForeignTradeERP\code\FTERP\FTERPStatic\obj\Debug\FTERPStatic.dll
+F:\Chean\Study\NET\Test\ForeignTradeERP\code\FTERP\FTERPStatic\obj\Debug\FTERPStatic.pdb
+D:\Projects\ForeignTradeERP\code\FTERP\FTERPStatic\bin\FTERPStatic.dll
+D:\Projects\ForeignTradeERP\code\FTERP\FTERPStatic\bin\FTERPStatic.pdb
+D:\Projects\ForeignTradeERP\code\FTERP\FTERPStatic\obj\Debug\FTERPStatic.dll
+D:\Projects\ForeignTradeERP\code\FTERP\FTERPStatic\obj\Debug\FTERPStatic.pdb
+F:\Chean\Study\NET\Test\ForeignTradeERP\code\FTERP\FTERPStatic\obj\Debug\FTERPStatic.csprojResolveAssemblyReference.cache
+D:\Projects\ForeignTradeERP\code\FTERP\FTERPStatic\obj\Debug\FTERPStatic.csprojResolveAssemblyReference.cache

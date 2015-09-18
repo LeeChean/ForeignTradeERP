@@ -1,0 +1,69 @@
+﻿@model FTERPWeb.Home.ViewModels.CommodityViewModel
+@{
+    ViewBag.Title = "商品编辑";
+    Layout = "~/Areas/Home/Views/Shared/_Layout.cshtml";
+}
+@Html.RenderNavHtml()
+<div class="m-content">
+    <div class="m-form f-cb">
+        @using (Html.BeginForm())
+        {
+            <dl class="f-cb">
+                <dt>商品类别：</dt>
+                <dd>@Html.TextBoxFor(model => model.Type, new { @class = "u-iptl trim", @maxlength = "20" })
+                    @Html.ValidationMessageFor(model => model.Type)
+                </dd>
+                <dt>中文名称：</dt>
+                <dd>@Html.TextBoxFor(model => model.ChName, new { @class = "u-iptl trim", @maxlength = "30" })
+                    @Html.ValidationMessageFor(model => model.ChName)
+                </dd>
+                <dt>英文名称：</dt>
+                <dd>@Html.TextBoxFor(model => model.EnName, new { @class = "u-iptl trim", @maxlength = "30" })
+                    @Html.ValidationMessageFor(model => model.EnName)
+                </dd>
+                <dt>商品货号：</dt>
+                <dd>
+                    @Html.TextBoxFor(model => model.ProductCode, new { @class = "u-iptl trim", @maxlength = "20" })
+                    @Html.ValidationMessageFor(model => model.ProductCode)
+                </dd>
+                <dt>商品单位：</dt>
+                <dd>
+                    @Html.TextBoxFor(model => model.Unit, new { @class = "u-iptl trim", @maxlength = "10" })
+                    @Html.ValidationMessageFor(model => model.Unit)
+                </dd>
+                <dt>关税率：</dt>
+                <dd>
+                    @Html.TextBoxFor(model => model.TariffRate, new { @class = "u-iptl trim", @maxlength = "10" })
+                    @Html.ValidationMessageFor(model => model.TariffRate)
+                </dd>
+                <dt>增值税率：</dt>
+                <dd>
+                    @Html.TextBoxFor(model => model.VatRate, new { @class = "u-iptl trim", @maxlength = "10" })
+                    @Html.ValidationMessageFor(model => model.VatRate)
+                </dd>
+                <dt>退税率：</dt>
+                <dd>
+                    @Html.TextBoxFor(model => model.RefundRate, new { @class = "u-iptl trim", @maxlength = "10" })
+                    @Html.ValidationMessageFor(model => model.RefundRate)
+                </dd>
+                <dt>海关编码：</dt>
+                <dd>
+                    @Html.TextBoxFor(model => model.CustomsNo, new { @class = "u-iptl trim", @maxlength = "20" })
+                    @Html.ValidationMessageFor(model => model.CustomsNo)
+                </dd>
+                <dt>备注：</dt>
+                <dd>
+                    @Html.TextBoxFor(model => model.Remark, new { @class = "u-iptl trim", @maxlength = "1000" })
+                    @Html.ValidationMessageFor(model => model.Remark)
+                </dd>
+            </dl>
+            <dl class="f-cb">
+                <dt></dt>
+                <dd>
+                    @Html.HiddenFor(model => model.Id)
+                    <input type="button" value="保存" class="u-btnblue" onclick="Common.Save({ actionUrl: '/Home/Commodity/Edit', backUrl: '@ViewBag.backUrl' });" />
+                    <input type="button" value="返回" class="u-btnblue marl10" onclick="location.href = '@ViewBag.backUrl';" /></dd>
+            </dl>
+        }
+    </div>
+</div>

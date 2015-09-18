@@ -1,0 +1,269 @@
+﻿@using PetaPoco
+@using FTERPCommon
+@model Page<FTERPWeb.Home.ViewModels.UserIndexModel>
+@{
+    ViewBag.Title = "用户列表";
+    Layout = "~/Areas/Home/Views/Shared/_Layout.cshtml";
+}
+@Html.RenderNavHtml()
+<div class="m-content">
+    @using (Html.BeginForm())
+    {
+        <!-- 操作 start -->
+        <div class="m-content">
+            <input type="hidden" id="exportFlag" name="exportFlag" value="0" />
+            <input type="hidden" id="backType" name="backType" value="@ViewBag.backType"/>
+            <input type="button" value="添加" class="u-btnblue" onclick="window.location.href = '/Home/User/Add'" />
+            <input type="button" value="编辑" class="u-btnblue" onclick="Redirect({operateName:'编辑',actionUrl:'/Home/User/Edit?CurrentPage=@ViewBag.CurrentPage'})" />
+            <input type="button" value="删除" class="u-btnblue" onclick="Operate({operateName:'删除',actionUrl:'/Home/User/Delete',backUrl:'/Home/User/Index'})" />
+            <input type="button" value="重置密码" class="u-btnblue" onclick="Operate({operateName:'重置密码',actionUrl:'/Home/User/ResetPassword',backUrl:'/Home/User/Index'})" />
+            <input type="button" value="绑定角色" class="u-btnblue" onclick="BindRole()" />
+            <input type="submit" value="导出Excel" class="u-btnblue" onclick="$('#exportFlag').val('1')" />
+            <input type="button" value="打印" class="u-btnblue" onclick="Print()" />
+        </div>
+        <!-- 操作 end -->
+        <div id="lodopTip">
+        </div>
+        <!-- search start -->       
+        <div class="m-schlist f-cb">
+            <div class="searchU">
+                <div class="searchUP">
+                    登录名：
+                </div>
+                <div class="searchUP">
+                    <input type="text" id="code" name="code" class="u-iptm trim" maxlength="30" />
+                </div>
+            </div>
+            <div class="searchU">
+                <div class="searchUP">
+                    姓名：
+                </div>
+                <div class="searchUP">
+                    <input type="text" id="name" name="name" class="u-iptm trim" maxlength="20" />
+                </div>
+            </div>
+            <div class="searchU">
+                <div class="searchUP">
+                    所属部门：
+                </div>
+                <div class="searchUP">
+                    <input type="text" id="department" name="department" class="u-iptm trim" maxlength="20" />
+                </div>
+            </div>
+            <div class="searchU">
+                <div class="searchUP">
+                    角色：
+                </div>
+                <div class="searchUP">
+                    @Html.DropDownList("role", ViewBag.Role as List<SelectListItem>, "全部", new { @class = "u-iptm" })
+                </div>
+            </div>
+            <div class="searchU">
+                <div class="searchUP">
+                    性别：
+                </div>
+                <div class="searchUP">
+                    <select id="gender" name="gender" class="u-iptm">
+                        <option value="">全部</option>
+                        <option value="0">女</option>
+                        <option value="1">男</option>
+                    </select>
+                </div>
+            </div>
+            <div class="searchU">
+                <div class="searchUP">
+                    用户状态：
+                </div>
+                <div class="searchUP">
+                    <select id="status" name="status" class="u-iptm">
+                        <option value="">全部</option>
+                        <option value="0">在职</option>
+                        <option value="1">离职</option>
+                        <option value="2">休假</option>
+                    </select>
+                </div>
+            </div>
+        </div>      
+        <!-- search end -->
+        <!-- 查询 start -->
+        <div class="m-schlist">
+            <div class="searchU">
+                <div class="searchUP">
+                    每页显示条数：
+                </div>
+                <div class="searchUP">
+                    <input type="text" name="itemsPerPage" class="u-ipts number" maxlength="2" />
+                    <input type="submit" value="查询" class="u-btnblue" onclick="$('#exportFlag').val('0')" />
+                </div>
+            </div>
+        </div>
+        <!-- 查询 end -->
+    }
+    <div id="tbData">
+        <table border="0" class="m-table f-cb mart20">
+            <tr>
+                <th class="f-width30">
+                    <input type="checkbox" class="checkall" />
+                </th>
+                <th class="f-width30">
+                    序号
+                </th>
+                <th class="f-width80">
+                    登录名
+                </th>
+                <th class="f-width80">
+                    姓名
+                </th>
+                <th class="f-width120">
+                    所属部门
+                </th>
+                <th class="f-width100">
+                    角色
+                </th>
+                <th class="f-width160">
+                    电话
+                </th>
+                <th class="f-width30">
+                    性别
+                </th>
+                <th class="f-width50">
+                    用户状态
+                </th>
+                <th class="f-width120">
+                    创建时间
+                </th>
+            </tr>
+            @if (Model.Items.Count == 0)
+            {
+                <tr>
+                    <td colspan="10">
+                        暂无数据
+                    </td>
+                </tr> 
+            }
+            @{ int index = FTERPWeb.Common.SysConfig.ItemsPerPage * ((int)Model.CurrentPage - 1); }
+            @foreach (var item in Model.Items)
+            {
+                index++;
+                <tr>
+                    <td>
+                        <input type="checkbox" class="checkone" value="@item.ID" />
+                    </td>
+                    <td>
+                        @index
+                    </td>
+                    <td>
+                        <a href="/Home/User/Details?id=@item.ID&CurrentPage=@ViewBag.CurrentPage">@item.Code</a>
+                    </td>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td title="@item.DepartmentName">
+                        @item.DepartmentName.SubStr(10, "...")
+                    </td>
+                    <td title="@item.RoleName">
+                        @item.RoleName.SubStr(10, "...")
+                    </td>
+                    <td>
+                        @item.Phone
+                    </td>
+                    <td>
+                        @item.Gender
+                    </td>
+                    <td>
+                        @item.Status
+                    </td>
+                    <td>
+                        @item.CreateTime
+                    </td>
+                </tr> 
+            }
+        </table>
+    </div>
+    @Html.RenderHomePage(Model)
+    <div>
+        <object id="LODOP_OB" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width="0"
+            height="0">
+            <embed id="LODOP_EM" type="application/x-print-lodop" width="0" height="0"></embed>
+        </object>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        var backType = $("#backType").val();
+        var code = Common.GetCookie("code");
+        var name = Common.GetCookie("name");
+
+        var department = Common.GetCookie("department");
+        var role = Common.GetCookie("role");
+        var gender = Common.GetCookie("gender");
+        var status = Common.GetCookie("status");
+
+        if ("1" == backType) {
+            $("#code").val(null == code ? "" : code);
+            $("#name").val(null == name ? "" : name);
+            $("#department").val(null == department ? "" : department);
+
+            $("#role").val(null == role ? "" : role);
+            $("#gender").val(null == gender ? "" : gender);
+            $("#status").val(null == status ? "" : status);
+        }
+
+        BindCheckAll();
+    });
+
+    $("form").submit(function () {
+        //将查询条件放入Cookie中
+        Common.SetCookie("code", $("#code").val());
+        Common.SetCookie("name", $("#name").val());
+        Common.SetCookie("department", $("#department").val());
+
+        Common.SetCookie("role", $("#role").val());
+        Common.SetCookie("gender", $("#gender").val());
+        Common.SetCookie("status", $("#status").val());
+        $("#backType").val("1");
+    });
+
+    //绑定角色
+    function BindRole() {
+        if ($('.checkone:checked').length == 0) {
+            Common.Tip("您尚未选择要绑定角色的记录！", null);
+        }
+        else if ($('.checkone:checked').length > 1) {
+            Common.Tip("请选择一条记录进行角色绑定！", null);
+        }
+        else {
+            art.dialog.open('/Home/User/BindRole?userId=' + $('.checkone:checked').val(), {
+                title: '绑定角色',
+                fixed: true,
+                close: function () {
+                    window.location = "/Home/User/Index";
+                }
+            });
+        }
+    }
+
+    //打印
+    var LODOP;
+    function Print() {
+        //CreateOneFormPage();
+        PrintByUrl();
+    }
+
+    function CreateOneFormPage() {
+        LODOP = getLodop();
+        LODOP.PRINT_INIT("打印某个部分");
+        LODOP.SET_PRINT_STYLE("FontSize", 18);
+        LODOP.SET_PRINT_STYLE("Bold", 1);
+        LODOP.ADD_PRINT_TEXT(50, 231, 260, 39, "打印页面部分内容");
+        LODOP.ADD_PRINT_HTM(88, 0, 1160, 300, $("#tbData").html());
+        LODOP.PREVIEW();
+    };
+
+    function PrintByUrl() {
+        LODOP = getLodop();
+        LODOP.PRINT_INIT("打印url页面");
+        LODOP.ADD_PRINT_URL(0, 0, "100%", "100%", "http://localhost:5846/Home/User/Details?id=9");
+        LODOP.PREVIEW();
+    }
+</script>

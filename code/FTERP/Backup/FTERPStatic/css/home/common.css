@@ -1,0 +1,120 @@
+@charset "utf-8";
+/* CSS Document */
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, button, textarea, p, blockquote, th, td {padding:0;margin:0;}
+fieldset, img, html, body, iframe, button , textarea, input{border:none;}
+table {border-collapse:collapse;border-spacing:0;}
+li {list-style:none;}
+em, i, small, caption, th {font-weight:normal;font-style:normal;font-size:100%;}
+h1, h2, h3, h4, h5, h6, em, strong, b {font-weight:bold;font-size:100%;}
+caption, th {text-align:left;}
+body {word-wrap:break-word;	font:12px/normal "Consolas", "Microsoft YaHei", "微软雅黑", tahoma, arial, simsun, "宋体";color:#666;;color:#555;	background:#fff;}
+textarea, input, button, select, pre {outline:0;font-size:inherit;line-height:inherit;color:inherit;font-family:inherit;}
+textarea{overflow:auto;resize:none;}
+input,textarea{padding:0 3px;}
+a, button, input[type="button"], input[type="submit"]{cursor:pointer;outline:0;}
+a, a:hover{text-decoration:none;}
+a{color:#666;}
+a:hover{color:#0a8cd2;}
+label{margin-left:5px;}
+
+
+/* 勾选框 */
+input[type="checkbox"],input[type="radio"]{vertical-align:middle; margin-right:3px;}
+input[type="radio"]{vertical-align:-1px;vertical-align:-3px\9;*vertical-align:-1px;}
+input[type="checkbox"]{vertical-align:-2px;}
+
+.g-in{width:1000px; margin:0 auto;}
+.g-in:after{display:block;visibility:hidden;height:0;overflow:hidden;clear:both;content:".";}
+.f-usn {-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none;}
+
+/* 浮动 */
+.f-fl{float:left!important;}
+.f-fr{float:right!important;}
+.f-tac{text-align:center!important;}
+.f-tar{text-align:right!important;}
+
+/* 距离 */
+.marl0{margin-left:0px!important;}
+.marl5{margin-left:5px!important;}
+.marl10{margin-left:10px!important;}
+.marl15{margin-left:15px!important;}
+.marl20{margin-left:20px!important;}
+.marl30{margin-left:30px!important;}
+.marr5{margin-right:5px!important;}
+.marr10{margin-right:10px!important;}
+.marr60{margin-right:60px!important;}
+.mart2{margin-top:2px!important;}
+.mart5{margin-top:5px!important;}
+*+html .mart5ie7{margin-top:0!important;}
+.mart10{margin-top:10px!important;}
+.mart15{margin-top:15px!important;}
+.mart20{margin-top:20px!important;}
+.marb10{ margin-bottom:10px!important;}
+.padt12{padding-top:12px!important;}
+.padr15{padding-right: 15px!important;}
+.padtb10{padding: 10px 0!important;}
+
+/* 宽度 */
+.f-width80{width:80px!important;}/* 两个操作 两个字 */
+.f-width100{width:100px!important;}
+.f-width112{width:112px!important;}/* 两个操作 一个两个字 一个四个字 */
+.f-width120{width:120px!important;}/* 三个操作 两个两个字 一个四个字个字 */
+.f-width150{width:150px!important;}/* 三个操作 两个两个字 一个四个字个字 */
+.f-width160{width:160px!important;}
+.f-width167{width:167px!important;}
+.f-width178{width:178px!important;}
+.f-width232{width:232px!important;}
+.f-width250{width:250px!important;}
+.f-width276{width:276px!important;width:258px\0!important;*width:262px!important;}
+.f-width288{width:288px!important;}
+.f-width320{width:320px!important;}
+.f-width400{width:400px!important;}
+.f-width475{width:475px!important;}
+.f-width488{width:488px!important;}
+.f-width500{width:500px!important;}
+.f-width580{width:580px!important;}
+.f-width620{width:620px!important;}
+.f-width700{width:700px!important;}
+
+
+/* 清除浮动 */
+.f-cb {clear:both;zoom:1;}
+.f-cb:after {clear:both;display:block;visibility:hidden;height:0;overflow:hidden;content:".";}
+
+/* 底部 */
+.g-ft{padding-bottom:10px;}
+.m-ft{line-height:25px;text-align:center; color:#7a7a7a;}
+
+/* 清除背景 */
+.f-bgnone{ background:none!important;}
+
+/* 字体颜色 */
+.z-err{ color:#F00!important;}
+.z-testrgt{color:#76cb3b;}
+
+/* 去掉边框 */
+.f-bdnone{border:none!important;}
+
+/* 字体大小 */
+.fs14{ font-size:14px!important;}
+.fs24{ font-size:24px!important;}
+
+/* 缩进 */
+.ti25{ text-indent:25px;}
+
+/* 隐藏 */
+.z-hide{ display:none!important;}
+
+/* 滚动条 */
+.f-oy{ overflow-x:hidden!important; overflow-y:auto!important;}
+
+/* 垂直居上 */
+.f-vat{vertical-align:top!important;}
+ 
+/* 链接下划线 */
+.f-tdu{ text-decoration:underline!important;}
+
+
+
+
+

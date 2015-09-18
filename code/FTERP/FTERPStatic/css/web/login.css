@@ -1,0 +1,182 @@
+﻿@charset "utf-8";
+/* CSS Document */
+/* 头部 */
+.g-hd{height:125px; min-width:1200px;}
+.m-hd{}
+.m-hd a{display:inline-block;width:396px;height:72px;}
+.m-hd a img{ margin-top:22px;width:396px; height:72px;}
+.m-hp, .m-hp1{ position:absolute; z-index:100;width:108px; height:40px; line-height:20px; font-family:"微软雅黑"; background:url(Images/bghelp-Log.png) no-repeat 0 0;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="C:/幼儿园/MTYECloud/TC/美工/WEB/html/Style/Images/bghelp-Log.png" ,sizingMethod="crop");
+_background: none; padding:80px 0 0 16px;}
+.m-hp{ top:-85px; right:0;}
+.m-hp1{ top:35px; right:0;}
+.m-hp a, .m-hp1 a{ font-size:20px;color:#603811}
+.m-hp a:hover, .m-hp1 a:hover{color:#00cad9;}
+
+/* Banner */
+.g-ban{height:504px; width:100%; min-width:1200px;background:url(Images/bgbanner-Log.png) repeat-x;position: relative; z-index:1;}
+.m-ban{ background:url(Images/banner-Log.jpg) no-repeat center center; height:504px;}
+
+
+/*二维码*/
+.m-tdim{ margin:260px 130px 0 0;_margin:260px 65px 0 0; height:116px; width:342px;}
+
+/* 登录 */
+.m-login{width:335px; margin-left:190px;_margin-left:90px;}
+.m-loginbox{float:left; width:100%; margin-top:150px;}
+.m-forget{ display:inline-block;float:left; margin:115px 0 0 100px;_margin:115px 0 0 100px;color:#603811;}
+.m-forget:hover{color:#00cad9; text-decoration:underline;}
+.m-login-ct{width:335px; float:left;}
+.m-login-ct .item{position:relative; z-index:1;width:335px;height:44px;font-size:15px;line-height:44px; border:1px solid #ddd;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius: 5px; margin-top:15px;}
+.m-login-ct .item01{position:relative; z-index:1;width:200px;height:44px;font-size:15px;line-height:44px; border:1px solid #ddd;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius: 5px; margin-top:15px; padding-left:10px;}
+.m-login-ct .z-yellowd{ width:290px;font-size:14px;height:20px; line-height:20px;border:none!important;background:none!important;margin-left:10px;margin-top:-20px;*+margin-top:-132px;_margin-left:10px;}
+.m-login-ct .u-box{ width:52px; height:48px; border-right:1px solid #fff;}
+.m-login-ct .codeImg{float:right;height:40px;}
+.m-login-ct .codeImg img{width:86px;height:36px; margin:5px;}
+.m-login-ct .item .u-ipt, .m-login-ct .item01 .u-ipt02{position:absolute;top:4px;left:12px;background:transparent;z-index:10;vertical-align:middle;word-wrap:normal;height:36px;*height:32px;line-height:36px;*line-height:32px;border:none!important; _padding-left:6px;color:#999;}
+.m-login-ct .item .u-ipt{width:320px;*width:315px;}
+.m-login-ct .item01 .u-ipt02{width:100px;*width:105px;}
+.m-login-ct .item label{ position:absolute; line-height:16px; top:16px; left:60px; visibility:visible; cursor:text;color:#999; vertical-align:middle; word-wrap:normal;}
+
+/* 登录按钮 */
+.u-btn{float:left; width:103px;height:46px;line-height:46px;text-align:center;color:#fff; font-size:18px; background:#69bed3;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius: 5px; }
+.u-btn:hover{ background:#00cad9;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius: 5px;}
+
+/* 忘记密码 */
+.g-banforg{height:504px; width:100%; min-width:1200px;background:url(Images/bgban-Forgrt.jpg) repeat-x;}
+.m-banforg{ background:url(Images/banner-Forgrt.png) no-repeat center center;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="C:/幼儿园/MTYECloud/TC/美工/WEB/html/Style/Images/banner-Forgrt.png" ,sizingMethod="crop");
+_background: none; height:504px;_margin:0 auto;_width:1186px;}
+.m-forgbgbox{width:394px; margin-left:490px; padding-top:140px;}
+.m-forgbg{ background:url(Images/bglogin-Forget.png) no-repeat center top;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="C:/幼儿园/MTYECloud/TC/美工/WEB/html/Style/Images/bglogin-Forget.png" ,sizingMethod="crop");
+_background: none;height:209px;width:394px; padding:60px 0 0 60px;_padding:170px 0 0 60px;_height:185px;*+padding:170px 0 0 60px;*+height:185px;}
+.m-tdimforg{ margin:-15px 30px 0 0;*+margin:-100px 30px 0 0;_margin:-125px 15px 0 0;height:100px; width:100px;}
+
+/* 密码重置 */
+.g-banrest{height:504px; width:100%; min-width:1200px;background:url(Images/bgban-Reset.jpg) repeat-x;}
+.m-banrest{ background:url(Images/banner-Reset.png) no-repeat center;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="C:/幼儿园/MTYECloud/TC/美工/WEB/html/Style/Images/banner-Reset.png" ,sizingMethod="crop");
+_background: none; height:504px;_margin:0 auto;_width:1186px;}
+.m-restbgbox{width:566px; margin-left:360px; padding-top:40px;}
+.m-restbg{ background:url(Images/bglogin-Reset.png) no-repeat center center;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="C:/幼儿园/MTYECloud/TC/美工/WEB/html/Style/Images/bglogin-Reset.png" ,sizingMethod="crop");
+_background: none; margin-left:113px;height:209px;width:394px; padding:60px 0 0 60px;_padding:160px 0 0 60px;_height:180px;*+padding:170px 0 0 60px;*+height:99px;}
+.m-restbg02{ background:url(Images/bglogin-Reset01.png) no-repeat center center;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="C:/幼儿园/MTYECloud/TC/美工/WEB/html/Style/Images/bglogin-Reset01.png" ,sizingMethod="crop");
+_background: none;height:107px;width:446px; padding-left:120px; line-height:116px; font-size:16px; color:#ffa200;}
+.m-restbg02 span{ display:inline-block;}
+.m-tdimrest{ margin:-15px 30px 0 0;*+margin:-30px 30px 0 0;_margin:-40px 15px 0 0;height:100px; width:100px;}
+
+/* 底部 */
+.g-ft{ padding-top:30px; border-top:1px solid #ddd;background-color:#f3f3f3; margin-top:0px; font-size:12px;}
+
+/* 帮助中心 */
+.helpbg{background:url(Images/bghelp.png) repeat-x; min-width:1200px;}
+
+
+
+/* 帮助中心顶部Tab页 */
+.g-nav{margin:0 auto;min-width:1200px;height:212px; background: url(Images/banner-Help.png) left top no-repeat;}
+.conLR{margin:0 auto;width:100%;}
+.tagsL{width:570px; margin:-67px auto 0; height:57px; padding-left:630px;}
+.tagsL li {float:left;display:inline-block;width:150px; height:40px; padding:10px 0 0 20px; line-height:30px; background:#00cad9; }
+.tagsL li a {float:left;font-size:20px; color:#fff;}
+.tagsL li:hover{ background:#00b9c7;}
+.tagsL li.selectTag{ background:#00b9c7;}
+
+
+
+.ico-ans, .ico-sof, .ico-con, .ico-vido{float:left;background:url(Images/navHelp.png) no-repeat -9999px -9999px;width:28px; height:27px; margin:3px 5px 0 0;}
+.ico-ans{background-position:-105px -1px;}
+.ico-sof{background-position:-37px -1px;}
+.ico-con{background-position:-71px -1px;}
+.ico-vido{background-position:-1px -1px;}
+
+.tagRContent { display:inline-block;width:100%; margin:0 auto;}
+.tagRContentCon {display:none;width:100%;height:100%; text-align:center;}
+.tagRContentCon h2 {display:block;line-height:20px;text-align:left;font-size:18px;font-weight:normal;}
+.tagRContent div.selectTag {display: block}
+/* 帮助中心顶部Tab页 */
+/* 帮助中心 意见反馈 联系客服 */
+.m-vl{font-size:12px;}
+/* 帮助中心 视频教程 */
+.m-vl{margin:10px auto; width:960px;}
+.m-vl li{ display:block;width:440px; margin-top:40px;}
+.m-vl li .img1{width:440px; height:278px; background:url(Images/video-Help01.png) no-repeat;}
+.m-vl li .img1:hover{width:440px; height:278px; background:url(Images/video-Help01_d.png) no-repeat;}
+.m-vl li .img2{width:440px; height:278px; background:url(Images/video-Help02.png) no-repeat;}
+.m-vl li .img2:hover{width:440px; height:278px; background:url(Images/video-Help02_d.png) no-repeat;}
+.m-vl li .img3{width:440px; height:278px; background:url(Images/video-Help03.png) no-repeat;}
+.m-vl li .img3:hover{width:440px; height:278px; background:url(Images/video-Help03_d.png) no-repeat;}
+.m-vl li .img4{width:440px; height:278px; background:url(Images/video-Help04.png) no-repeat;}
+.m-vl li .img4:hover{width:440px; height:278px;background:url(Images/video-Help04_d.png) no-repeat;}
+.m-vl li p a{display:block;width:440px; line-height:40px; text-align:center; font-size:16px; color:#666;}
+.m-vl li p a:hover{color:#666;}
+
+/* 帮助中心  联系客服 */
+.conimg{background: url(Images/bgcon.png) repeat-x bottom; height:464px; text-align:center; margin-top:30px;}
+.conimg p{margin:0 auto;height:464px; width:945px;}
+/* 帮助中心ico */
+.ico-hint{display:inline-block;background:url(Images/ico-Bulb.png) no-repeat;width:14px; height:20px; vertical-align:middle; margin-right:10px;}/* 内容及要求提示 */ 
+
+/* 帮助中心 常用软件下载 */
+.m-sfdlbox01{ margin-top:20px; width:100%; text-align:center;}
+.m-sfdlbox01 .imgbox{ display:inline-block;width:896px; height:434px; background: url(Images/helpcenter-app01.jpg) no-repeat;}
+.m-sfdlbox01 .imgbox .imgtit{ display:inline-block; margin:160px 0 0 482px; width:400px;}
+.m-sfdlbox01 .imgbox .imgtit .erwei{ display:inline-block; border:3px solid #ffda06;-moz-border-radius:3px; -webkit-border-radius:3px; border-radius:3px; padding:5px;}
+.m-sfdlbox01 .imgbox .imgtit span{ display:inline-block; width:190px; text-align:left;}
+.m-sfdlbox01 .imgbox .imgtit span p{ display:inline-block; font-size:20px; margin:85px 0 10px;}
+.m-sfdlbox02{ width:100%; text-align:center; background:#00cad9;}
+.m-sfdlbox03{ width:100%; text-align:center; background:#ffda06;}
+
+/* 帮助中心 下载按钮 */
+.u-btn09, .u-btn09:hover{display:inline-block;*display:inline;*zoom:1;*overflow:visible;-webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box;padding:0 15px;-moz-border-radius:3px; -webkit-border-radius:3px; border-radius:3px;letter-spacing:1px;word-spacing:normal;text-align:center;vertical-align:middle;color:#fff;overflow:visible; font-family: "微软雅黑", "宋体"!important;}
+.u-btn09{ width:74px;height:36px;line-height:32px;text-align:center;color:#fff; font-size:16px;background-color:#5cb85c; border:1px solid #4cae4c; margin-bottom:20px;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius: 5px;}
+.u-btn09:hover{background-color:#449d44; border:1px solid #46b8da;}
+ 
+
+/* 帮助中心 意见反馈 */
+.m-fb{ width:940px; margin:0 auto;}
+.m-fb h3{display:block; margin-top:30px;line-height:30px;text-align:left;font-size:16px;font-weight:normal; }
+.m-fb p{display:block;line-height:25px; text-align:left;}
+.m-fb p em{margin-left:3px; font-weight:normal; color:#939393;}
+.u-taa07{width:100%; height:20px;line-height:20px; padding-top:5px; padding-bottom:5px; background:#fff; border:1px solid #e8e8e8; height:175px;-moz-border-radius:2px; -webkit-border-radius:2px; border-radius:2px;}
+.u-iptll{ width:100%;height:32px; line-height:32px; border:1px solid #e1e1e1; background-color:#FFF;-moz-border-radius:2px; -webkit-border-radius:2px; border-radius:2px;}
+
+
+
+
+/* 404 */
+.g-404{height:520px; width:100%; background-color:#d0f2ff;}
+.m-404{ background:url(Images/404.png) no-repeat center center; height:520px;}
+.m-404 .txt{float:left; margin:290px 0 0 345px;_margin:290px 0 0 175px; width:450px;}
+.m-404 .txt p{float:left;line-height:35px; text-align:left; font-size:16px; color:#333333;}
+.m-404 .txt a{display:block;line-height:30px; text-align:left; font-size:16px; color:#00cad9; text-decoration:underline;}
+.m-404 .txt a:hover{color:#00939e;}
+
+/* 异常页 */
+.g-abnormal{height:520px; width:100%; background-color:#b5defa;}
+.m-abnormal{ background:url(Images/abnormal.png) no-repeat center center; height:520px;}
+.m-abnormal dl{float:left; margin:210px 0 0 615px; _margin:260px 0 0 235px; width:450px;}
+.m-abnormal dl dt{display:block; clear:left; margin-bottom:10px; height:60px; line-height:60px; text-align:left; font-size:36px; font-weight:bold; color:#ffffff;}
+.m-abnormal dl dd{display:block; clear:left;line-height:35px; text-align:left; font-size:16px; color:#333333;}
+.m-abnormal dl dd i{color:#00939e;}
+
+/* 操作成功提示 */
+.g-succeed{height:520px; width:100%; background-color:#6bdbd3;}
+.m-succeed{ background:url(Images/hintSucceed.png) no-repeat center 115px; height:520px;}
+.m-succeed dl{float:left; margin:260px 0 0 455px; width:450px;}
+.m-succeed dl dt{display:block; clear:left; margin-bottom:10px; height:60px; line-height:60px; text-align:left; font-size:45px; font-weight:bold; color:#ffffff;}
+.m-succeed dl dd{display:block; clear:left;line-height:35px; text-align:left; font-size:18px; color:#333333;}
+.m-succeed dl dd i{margin:0 5px;color:#01929d;}
+.m-succeed dl dd a{color:#01929d; text-decoration:underline;}
+.m-succeed dl dd a:hover{color:#007e87;}
+
+/* 二维码扫描 */
+.m-code{ width:90%; padding:0 5%; margin:0 auto; text-align:center;font-size:48px; line-height:200px; color:#888;}
+.m-code img{ position:relative; width:175px; height:183px; margin:0 auto; padding-top:150px;}
+.u-btnBlue{ display:inline-block; clear:both; float:left; width:80%; padding:0 10%; height:150px; line-height:150px;  font-size:smaller;background:#01b9c5; color:#fff;  text-align:left; margin-bottom:50px; border-radius:5px; vertical-align:middle;}
+.u-btnBlue:hover{ color:#fff; background:#06d0dd;}
+.u-btnBlue i{ display:inline-block; width:72px; height:72px; margin-right:30px; vertical-align:-24px; *vertical-align:middle;}
+.u-code1{ background:url(Images/icoCode1.png) no-repeat;}
+.u-code2{ background:url(Images/icoCode2.png) no-repeat;}
+
+.m-codemask{ position:absolute; display:none; background:#000;filter:alpha(opacity=70);opacity: 0.7; top:0; left:0; cursor:pointer;}
+.m-codebox{ position:relative; float:right; width:320px;}
+.m-codebox img{ float:right; padding:20px 50px;}
+.m-codebox p{ clear:both; color:#fff; font-size:30px; line-height:36px;}

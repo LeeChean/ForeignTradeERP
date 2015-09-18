@@ -1,0 +1,29 @@
+﻿@using FTERPWeb.Home.ViewModels
+@{
+    ViewBag.Title = "";
+    Layout = "~/Areas/Home/Views/Shared/_Layout.cshtml";
+}
+<div class="m-content">
+    <div class="m-form f-cb">
+        <div class="f-cb marl20 marr20 fs14">
+            @if (ViewBag.Progress == null || ((List<ApprovalProgressViewModel>)ViewBag.Progress).Count() == 0)
+            {
+                <div style="text-align: center">
+                    暂无数据</div>     
+            }
+            else
+            {
+                foreach (var item in (List<ApprovalProgressViewModel>)ViewBag.Progress)
+                {
+                    var color = item.Status == "通过" ? "color:Green" : "color:Red";
+                <div style="background-color: #f2f2f5" class="WB_expand">
+                    <div>
+                        <span style="font-weight: 700">@(item.UserName)[@item.RoleName]:</span><span style="@color">@item.Status</span></div>
+                    <div class="WB_text">@item.Remark</div>
+                    <div style="color: #808080; font-size: 12px">@item.Time</div>
+                </div>
+                }
+            }
+        </div>
+    </div>
+</div>

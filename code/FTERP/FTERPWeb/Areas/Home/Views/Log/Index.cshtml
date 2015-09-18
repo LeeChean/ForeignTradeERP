@@ -1,0 +1,150 @@
+﻿@using PetaPoco
+@model Page<FTERPWeb.Home.ViewModels.LogIndexModel>
+@{
+    ViewBag.Title = "操作日志列表";
+    Layout = "~/Areas/Home/Views/Shared/_Layout.cshtml";
+}
+@section head{
+}
+@Html.RenderNavHtml()
+<div class="m-content">
+    @using (Html.BeginForm())
+    {
+        <!-- 操作 start -->
+        <div class="m-content">
+            <input type="hidden" id="backType" name="backType" value="@ViewBag.backType"/>
+            <input type="submit" value="导出Excel" class="u-btnblue" onclick="$('#exportFlag').val('1')" />
+        </div>
+        <!-- 操作 end --> 
+        <!-- search start -->
+        <div class="m-schlist f-cb">
+            <div class="searchU">
+                <div class="searchUP">
+                    登录名：
+                </div>
+                <div class="searchUP">
+                    <input type="text" id="code" name="code" class="u-iptm trim" maxlength="15" />
+                </div>
+            </div>
+            <div class="searchU">
+                <div class="searchUP">
+                    姓名：
+                </div>
+                <div class="searchUP">
+                    <input type="text" id="userName" name="userName" class="u-iptm trim" maxlength="15" />
+                </div>
+            </div>
+            <div class="searchU">
+                <div class="searchUP">
+                    操作时间：
+                </div>
+                <div class="searchUP">
+                    <input id="startDate" name="startDate" class="Wdate u-iptm" type="text"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',startDate:'', isShowClear:true, minDate:'1900-01-01' , maxDate:'@DateTime.Today.ToString("yyyy-MM-dd")'});if((new Date(document.getElementById('startDate').value.replace(/\-/g, '\/')))>(new Date(document.getElementById('endDate').value.replace(/\-/g, '\/')))){$('#endDate').val($(this).val())}"/>
+                </div>
+                <div class="searchUP">
+                    -
+                </div>
+                <div class="searchUP">
+                    <input id="endDate" name="endDate" type="text" class="Wdate u-iptm" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd', isShowClear:true,startDate:'', minDate:'#F{$dp.$D(\'startDate\')}' , maxDate:'@DateTime.Today.ToString("yyyy-MM-dd")'})"/>
+                </div>
+            </div>
+        </div>     
+        <!-- search end -->
+        <!-- 查询 start -->
+        <div class="m-schlist">
+            <div class="searchU">
+                <div class="searchUP">
+                    每页显示条数：
+                </div>
+                <div class="searchUP">
+                    <input type="text" name="itemsPerPage" class="u-ipts number" maxlength="2" />
+                    <input type="submit" value="查询" class="u-btnblue" onclick="$('#exportFlag').val('0')" />
+                </div>
+            </div>
+        </div>
+        <!-- 查询 end -->
+    }
+    <div class="clear02">
+    </div>
+    <table border="0" class="m-table f-cb mart20">
+        <tr>
+            <th class="f-width100">
+                登录名
+            </th>
+            <th class="f-width100">
+                姓名
+            </th>
+            <th class="f-width100">
+                操作描述
+            </th>
+            <th class="f-width100">
+                登录时间
+            </th>
+        </tr>
+        @if (Model == null || Model.Items.Count == 0)
+        {
+            <tr>
+                <td colspan="4">
+                    暂无数据
+                </td>
+            </tr>
+        }
+        else
+        {
+            foreach (var item in Model.Items)
+            {
+            <tr>
+                <td>
+                    @item.Code
+                </td>
+                <td>
+                    @item.UserName
+                </td>
+                <td>
+                    @item.Remark
+                </td>
+                <td>
+                    @item.CreateTime
+                </td>
+            </tr>
+            }
+        }
+    </table>
+    <div class="clear02">
+    </div>
+    @Html.RenderHomePage(Model)
+</div>
+<!-- JS -->
+<script type="text/javascript">
+    $(function () {
+        var backType = $("#backType").val();
+
+        var code = Common.GetCookie("code");
+        var userName = Common.GetCookie("userName");
+
+        var remark = Common.GetCookie("remark");
+        var startDate = Common.GetCookie("startDate");
+        var endDate = Common.GetCookie("endDate");
+
+        if ("1" == backType) {
+            $("#code").val(code);
+            $("#userName").val(userName);
+
+            $("#remark").val(remark);
+            $("#startDate").val(startDate);
+            $("#endDate").val(endDate);
+        }
+    });
+
+    $("form").submit(function () {
+        Common.SetCookie("code", $("#code").val());
+        Common.SetCookie("userName", $("#userName").val());
+
+        Common.SetCookie("remark", $("#remark").val());
+        Common.SetCookie("startDate", $("#startDate").val());
+        Common.SetCookie("endDate", $("#endDate").val());
+
+        $("#backType").val("1");
+    });
+</script>
+<!-- /JS -->

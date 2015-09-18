@@ -1,0 +1,120 @@
+﻿@using FTERPWeb.Common
+@model FTERPWeb.Models.SupplierModel
+@{
+    ViewBag.Title = "";
+    Layout = "~/Areas/Home/Views/Shared/_Layout.cshtml";
+}
+<div class="m-tt">
+    审批</div>
+<div class="m-content">
+    <div class="m-form f-cb">
+        <dl class="f-fl marl200 f-width400">
+            <dt>供应商类别：</dt>
+            <dd>
+                @Model.Type
+            </dd>
+            <dt>中文名称：</dt>
+            <dd>
+                @Model.ChName
+            </dd>
+            <dt>英文名称：</dt>
+            <dd>
+                @Model.EnName
+            </dd>
+            <dt>简称：</dt>
+            <dd>
+                @Model.ShortName
+            </dd>
+            <dt>国家：</dt>
+            <dd>
+                @ViewBag.Country
+            </dd>
+            <dt>地址：</dt>
+            <dd>
+                @Model.Address
+            </dd>
+            <dt>电话：</dt>
+            <dd>
+                @Model.Phone
+            </dd>
+            <dt>邮箱：</dt>
+            <dd>
+                @Model.Email
+            </dd>
+        </dl>
+        <dl class="f-fl f-width400">
+            <dt>联系人：</dt>
+            <dd>
+                @Model.Linkman
+            </dd>
+            <dt>开户行：</dt>
+            <dd>
+                @Model.OpeningBank
+            </dd>
+            <dt>开户行账号：</dt>
+            <dd>
+                @Model.BankAccount
+            </dd>
+            <dt>备注：</dt>
+            <dd>
+                @Model.Remark
+            </dd>
+            <dt>审批状态：</dt>
+            <dd>
+                @ViewBag.Status
+            </dd>
+            <dt>业务员：</dt>
+            <dd>
+                @ViewBag.BelongsMan
+            </dd>
+            <dt>业务部门：</dt>
+            <dd>
+                @ViewBag.BelongsDepartment
+            </dd>
+            <dt>制单人：</dt>
+            <dd>
+                @ViewBag.CreateMan
+            </dd>
+            <dt>制单时间：</dt>
+            <dd>
+                @ViewBag.CreateTime
+            </dd>
+        </dl>
+        <dl>
+            <dt></dt>
+            <dd>
+                <a style="color:#f07f1a" onclick="Common.ShowProgress(@Model.Id)">查看审批进度</a>
+            </dd>
+            <dt>审批意见：</dt>
+            <dd>
+                <textarea id="remark" class="u-taal"></textarea>
+            </dd>
+        </dl>
+        <dl class="f-cb">
+            <dt></dt>
+            <dd>
+                <input type="button" value="通过" class="u-btnblue marl10" onclick="Approve(1)" />
+                <input type="button" value="驳回" class="u-btnblue marl10" onclick="Approve(0)" />
+                <input type="button" value="取消" class="u-btnblue marl10" onclick="javascript:history.go(-1);" /></dd>
+        </dl>
+    </div>
+</div>
+<script type="text/javascript">
+    function Approve(type) {
+        var typeName = type == 0 ? "驳回" : "通过";
+        $.ajax({
+            url: "/Home/Supplier/Approve",
+            type: "post",
+            dataType: "text",
+            data: { docId: "@Model.Id", aId: "@ViewBag.aId", roleId: "@ViewBag.roleId", type: typeName, remark: $("#remark").val() },
+            success: function (msg) {
+                if (msg == "1") {
+                    Common.Success(typeName + "成功", function () { top.window.location.href = "/Home/Main/Index"; });
+                }
+                else {
+                    Common.Success(typeName + "失败", function () { });
+                }
+            }
+        });
+    }
+</script>

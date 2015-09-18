@@ -1,0 +1,211 @@
+﻿@{
+    ViewBag.Title = "";
+}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>登录</title>
+    @Html.StaticFor("/css/home/login.css")
+    @Html.StaticFor("/css/home/common.css")
+    @Html.StaticFor("/css/home/backstage.css")
+    @Html.StaticFor("/js/jquery/jquery-1.7.2.min.js")
+</head>
+<body>
+    <!-- 头部 -->
+    <div class="g-hd f-cb">
+        <div class="g-in">
+            <div class="m-hd">
+                <a href="#">
+                    <img src="@Html.StaticFor("/css/home/Images/bslogo.png")" /></a>
+            </div>
+        </div>
+    </div>
+    <!-- /头部 -->
+    <!-- banner -->
+    <div class="g-ban f-cb">
+        <div class="g-in">
+            <div class="m-ban">
+                <p>
+                    &nbsp;</p>
+                <p>
+                    &nbsp;</p>
+            </div>
+            <div class="g-logcn">
+                <div class="g-login f-cb">
+                    <div class="m-login">
+                        @using (Html.BeginForm("Index", "Login", FormMethod.Post))
+                        {
+                            <div class="m-login-tt f-cb">
+                                <h3>
+                                    管理平台</h3>
+                            </div>
+                            <div class="m-login-ct">
+                                <div style="height: 20px">
+                                    <span id="errorTip" class="z-err">@Html.ValidationSummary()</span>
+                                </div>
+                                <div>
+                                    <input type="text" id="loginName" name="loginName" value="@ViewBag.LoginName" class="u-ipt"
+                                        maxlength="50" onfocus="User.input(this,'1')" onblur="User.tip(this,'1')" />
+                                    <input id="pwdTip" type="text" class="u-ipt" value="请输入密码" onfocus="User.input(this,'2')" />
+                                    <input id="pwd" name="pwd" type="password" class="u-ipt z-black" maxlength="50" onblur="User.tip(this,'2')" />
+                                    @{
+                            int num = 0;
+                            if (Request.Cookies["loginNum"] != null)
+                            {
+                                num = Convert.ToInt32(Request.Cookies["loginNum"].Value);
+                                if (num >= 2)
+                                {
+                                        <input type="text" id="code" name="code" class="u-ipt02" value="请输入验证码" maxlength="4"
+                                            autocomplate="off" onfocus="User.input(this,'3')" onblur="User.tip(this,'3');" />
+                                        <div class="codeImg f-fr">
+                                            <a>
+                                                <img id="codeImg" onclick="User.changeCode()" /></a>
+                                        </div>
+                                }
+                            }   
+                                    }
+                                </div>
+                                <input type="hidden" name="ReturnUrl" value="@ViewBag.ReturnUrl"/>
+                                <input class="u-btn f-fr mart15" type="submit" onclick="return User.check()" value="登录" />
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /banner -->
+    <!-- 底部 -->
+    <div class="g-ft f-cb mart20">
+        <div class="g-in">
+            @Html.Partial("FootPartialView")
+        </div>
+    </div>
+    <!-- /底部 -->
+    <script type="text/javascript">
+        User = {
+            init: function () {
+                var loginName = $("#loginName").val();
+                if (loginName != "请输入登录名") {
+                    $("#loginName").attr("class", "u-ipt z-black");
+                }
+
+                $("#pwd").hide();
+                User.changeCode();
+            },
+            input: function (obj, type) {
+                if (type == "1" || type == "3") {
+                    if ($(obj).val() == "请输入登录名" || $(obj).val() == "请输入验证码") {
+                        $(obj).val("");
+                        var cssName = $(obj).attr("class") + " z-black";
+                        $(obj).attr("class", cssName);
+                    }
+                }
+                else if (type == "2") {
+                    $("#pwdTip").hide();
+                    $("#pwd").show();
+                    $("#pwd").focus();
+                }
+            },
+            tip: function (obj, type) {
+                if (type == "2") {
+                    var value = $(obj).val();
+                    if (value == "") {
+                        //密码提示
+                        $("#pwdTip").show();
+                        $("#pwd").hide();
+                    }
+                }
+                else {
+                    var value = $.trim($(obj).val());
+                    $(obj).val(value);
+
+                    if ($(obj).val() == "") {
+                        var cssName = $(obj).attr("class").replace(/z-black/, "");
+                        $(obj).attr("class", cssName);
+
+                        if (type == "1") {
+                            //登录名提示
+                            $(obj).val("请输入登录名");
+                        }
+                        else if (type == "3") {
+                            //验证码提示
+                            $(obj).val("请输入验证码");
+                        }
+                    }
+                }
+            },
+            changeCode: function () {
+                $("#codeImg").attr("src", "/Home/Login/GenerateCodeImg?" + Math.random());
+            },
+            check: function () {
+                $("#errorTip").html("");
+
+                //检查登录名
+                if (!User.check_loginName()) {
+                    return false;
+                }
+                //检查密码
+                if (!User.check_pwd()) {
+                    return false;
+                }
+
+                //检查验证码
+                var code = document.getElementById("code");
+                if (code != null && !User.check_code()) {
+                    User.changeCode();
+                    return false;
+                }
+
+                return true;
+            },
+            check_loginName: function () {
+                var loginName = $.trim($("#loginName").val());
+                if (loginName == "请输入登录名") {
+                    $("#errorTip").html("请输入登录名！");
+                    return false;
+                }
+                return true;
+            },
+            check_pwd: function () {
+                var pwd = $("#pwd").val();
+                if (pwd == "") {
+                    $("#errorTip").html("请输入密码！");
+                    return false;
+                }
+                return true;
+            },
+            check_code: function () {
+                var flag = false;
+                var code = $.trim($("#code").val());
+                if (code == "请输入验证码") {
+                    $("#errorTip").html("请输入验证码！");
+                    return false;
+                }
+                else {
+                    $.ajax({
+                        url: "/Home/Login/CheckCode?code=" + code,
+                        type: "get",
+                        dataType: "text",
+                        async: false,
+                        success: function (msg) {
+                            if (msg == "1") {
+                                $("#errorTip").html("");
+                                flag = true;
+                            }
+                            else {
+                                $("#errorTip").html(msg);
+                            }
+                        }
+                    });
+                }
+                return flag;
+            }
+        };
+
+        User.init();
+    </script>
+</body>
+</html>
+<!-- /尾部 -->
